@@ -2,6 +2,8 @@ cabal.sandbox.config
 .cabal-sandbox/*
 *.hi
 *.o
-*/site
-*/_site/*
-*/_cache/*
+site
+.stack-work/*
+_site/*
+_cache/*
+dist-newstyle/*

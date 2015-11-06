@@ -1,0 +1,28 @@
+name: Deploy Hakyll Generated Website to GitHub Pages
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.1
+
+      - uses: haskell/actions/setup@v1
+        with:
+          ghc-version: '8.10.1' # Exact version of ghc to use
+          # cabal-version: 'latest'. Omitted, but defaults to 'latest'
+          enable-stack: true
+          stack-version: 'latest'
+
+      - name: Install and build
+        run: stack install hakyll && stack build && stack exec site build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          branch: gh-pages
+          folder: _site/ # The folder the action should deploy.
