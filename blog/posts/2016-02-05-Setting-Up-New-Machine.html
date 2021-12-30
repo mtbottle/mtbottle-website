@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>michtran.ca/blog - New Year's Reinstallation</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../../blog">michtran.ca/blog</a>
+            </div>
+            <div id="navigation">
+                <a href="../../blog/about.html">About</a>
+                <a href="../../">Find</a>
+                <a href="../../blog/archive.html">Archive</a>
+                <a href="../../atom.xml">Atom</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>New Year's Reinstallation</h1>
+
+            <div class="info">
+<em>Posted on February  5, 2016</em>
+    
+</div>
+
+<p>I have recently become more interested in better security practices. Since my harddrive was unencrypted, this was definitely the motivation to reformatting my computer. Also since I travel a lot, I would be more prone to losing my laptop, which means that anyone who gets access to my laptop would be able to get [important] files that I have stored on it.</p>
+<p>Even aside from security, my ubuntu install was already getting bloated with all the development packages that I had to install and I was ready for a fresh clean start.</p>
+<p>This blog entry is to make notes of the tweaks that I had to do get install a “standard” debian image with xmonad tiling windows manager. I am installing this on a Lenovo Thinkpad T420s laptop.</p>
+<!--more-->
+<h2 id="xmonad-and-twm-tiling-windows-managers">Xmonad and TWM (Tiling Windows Managers)</h2>
+<p>I have been interested to switching to a tiling windows manager for about a year. TWMs are alternatives to desktop environments (like gnome, kde, xfce… etc) and stacking windows manager (like fluxbox, lwm… etc). I had been using gnome from 2009 to 2014 then switched to fluxbox in 2014 to present. The main reason for switching to fluxbox was because gnome at startup was using up about 1Gb of memory, I needed to run a server that was going to use up 3Gb and had only 4Gb of RAM. This resulted in lots of out of memory crashes and I couldn’t get my job done. Although I was decently happy with fluxbox, I felt like productivity could be improved if I wasn’t constantly resizing my windows (and fluxbox’s way to manually set these was somewhat buggy for me). Additionally, I also knew a few people who are already using TWM, and I was intrigued by learning a new paradigm. This is what inevitably led me to switching to a TWM.</p>
+<p>The reasons to switch to a tiling windows manager all comes down to personal preferences. For me they were:</p>
+<ul>
+<li>I wanted to become less dependent on using a mouse because it is inconvenient on a laptop.</li>
+<li>Tend to use less resources than desktop environments.</li>
+<li>Using keyboard shortcuts for everything improves productivity and speed.</li>
+<li>And I wanted something minimal (I <em>hate</em> fancy graphical effects on my desktop).</li>
+</ul>
+<p>Other tiling windows manager I’ve considered where i3 and dwm. I decided to go with xmonad because the configurations are in haskell (and I am learning haskell!). <a href="https://wiki.archlinux.org/index.php/Comparison_of_tiling_window_managers">Here</a> is an exhaustive comparison of the different types of tiling windows managers out there.</p>
+<p>Because I was installing this from a clean debian image, there are some things I have to add to make using my computer somewhat pleasant. The barebone xmonad configurations will give an empty screen without any clutter (ie. no icons). However this also meant that there was no convenient graphical interface to do things like adjust sound volume or network manager to connect to wifi hotspots. In fact, neither sound nor wireless network control was installed at all by the standard debian installation. So here are some notes about what extras I had to add to have a decently functional machine.</p>
+<h3 id="login-and-authentication">Login and Authentication</h3>
+<p>Since I installed debian with an encrypted harddive, my unencrypt key can technically be part of startup authentication since it is a password that I have to enter before I get access to my machine. However I still installed slim to deal with signing in at startup anyways. The usecase was that I could switch to a different user or windows manager if I decided to add either. I installed <a href="https://wiki.archlinux.org/index.php/SLiM">SliM</a> to deal with login management.</p>
+<p>Since there is no handy lockscreen mechanism in my minimal setup, I set up xscreensaver to enable this. Xscreensaver runs as a daemon on startup (by adding it to my .xsession file). To add lock screen, I had to add keybinding to xmonad to call “xscreensaver-command -lock”.</p>
+<h3 id="wifi">WIFI</h3>
+<p>Unfortunately debian does <a href="https://www.debian.org/doc/debian-policy/ch-archive.html">not support</a> my Intel chip wireless card straight out of the box. I had to manually install <a href="https://wiki.debian.org/iwlwifi">iwlwifi</a> to add support for the card. Since I did not want to configure my wifi via my /etc/network/interfaces file (I know some hardcore people who do that), I installed <a href="https://wiki.archlinux.org/index.php/Wicd">wicd</a> which is a lightweight graphical network management interface.</p>
+<h3 id="sound">Sound</h3>
+<p>Fortunately my sound card did not require any configuration. To interface with it, I installed amixer and alsamixer. The volume buttons on my Thinkpad was not configured, so I added some keybindings to xmonad. The commands to toggle to volume were:</p>
+<pre><code>amixer sset Master 1-
+amixer sset Master 1+</code></pre>
+<p>In addition to configuring the soundcard, I also had to install a music player. The one that I had installed was Clementine. It is a decent music client, but I wanted the challenge of using one with a command line interface. So I decided to install and <a href="http://www.musicpd.org/">mpd</a> server with <a href="https://wiki.archlinux.org/index.php/Ncmpcpp">ncmpcpp</a> user interface.</p>
+<p>Mpd was a pain to set up because of very strict permissions. It is a daemon that sets up a server on your music directory that lets you connect your client (ncmpcpp in this case) to play music. The daemon runs as mpd user and audio group, which means that your files must at least haveglobal read permissions. So if your files don’t show up in the server, then it is likely a permissions problem!</p>
+<h3 id="battery-indicator">Battery Indicator</h3>
+<p>The last thing that I needed was a battery indicator. Without this, I would have to depend in my thinkpad’s annoying beeping to indicate when I have to plug in my laptop (not ideal…). I chose <a href="http://iplab.aist-nara.ac.jp/member/suguru/xbattbar.html">xbattbar</a> because of how lightweight it was (admittedly I had already used it for fluxbox). It is fairly simple to set up; I added it in my .xsession file to run in the background.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>I overestimated the time I would have needed to get comfortable using a TWM and configuring all the necessary things stated. This reinstallation was more of an exercise to learn more about the linux environment and to create a more efficient workflow for programming. I managed to finish configuring most things in one day (internet, sound, configuring xmonad, battery, custom shell and text editor). Mpd took me about half a day to configure. All in all, it took me about 2 days to configure and I am decently used to working with it.</p>
+
+        </div>
+        <footer>
+          <noscript>:)</noscript>
+          <p>This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</p>
+        </footer>
+    </body>
+</html>

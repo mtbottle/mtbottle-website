@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>michtran.ca/blog - Setting up ftp to update wordpress</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../../blog">michtran.ca/blog</a>
+            </div>
+            <div id="navigation">
+                <a href="../../blog/about.html">About</a>
+                <a href="../../">Find</a>
+                <a href="../../blog/archive.html">Archive</a>
+                <a href="../../atom.xml">Atom</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Setting up ftp to update wordpress</h1>
+
+            <div class="info">
+<em>Posted on April  5, 2014</em>
+    
+</div>
+
+<p>So, I guess I’ve had this blog for a while, but only decided to do real maintainance now (partly because I’m bored from being funemployed, but also to ramp up on system admin skills that are getting rusty). This will be a journal entry to how I set up the FTP so that I could update the wordpress on this very blog. <!--more--> The tutorial could not have been accomplished without the help of <a href="https://help.ubuntu.com/10.04/serverguide/ftp-server.html">Ubuntu’s FTP Server setup</a>.</p>
+To start out, my Ubuntu installation did not have ftp installed. While researching this, I found that I could also set up wordpress to update from ssh as well. However, since I have never used ftp over linux (because sftp is good enough for me), I decided to try installing ftp. You install the ftp service with :
+<blockquote>
+<code>sudo apt-get install vsftpd</code>
+</blockquote>
+I added a new ftp-user so that I didn’t have to give wordpress its own restricted user account.
+<blockquote>
+<code>sudo passwd ftp-user</code>
+</blockquote>
+I also had to make sure that the ftp-user’s root directory was the wordpress installation (so that it knew where to install the update).
+<blockquote>
+<code>sudo usermod -d /somewhere/somewhere/wordpress ftp-user</code>
+</blockquote>
+Then I opened /etc/vsftpd.conf and uncommented the following line (according to the ubuntu tutorial which I linked) :
+<blockquote>
+<code>local_enable=YES write_enable=YES </code>
+</blockquote>
+<b>TROUBLESHOOT :</b> Also, for some reason ftp doesn’t work if the ftp user’s chroot directory has user-level write permissions. So after an odious amount of time googling I solved that by running
+<blockquote>
+<code>sudo chmod a-w /somewhere/somewhere/wordpress/</code>
+</blockquote>
+<p>(sorry, can’t cite where I found this as I closed the tab, and in fact, I don’t quite understand how this works either)</p>
+Then I restarted the server with this command for ubuntu:
+<blockquote>
+<code>sudo service vsftpd restart</code>
+</blockquote>
+PS. For those who are oldschool (and don’t have <a href="http://linux.die.net/man/8/service">service</a> installed), can also restart the ftp server with :
+<blockquote>
+<code>sudo /etc/init.d/vsftpd restart</code>
+</blockquote>
+
+        </div>
+        <footer>
+          <noscript>:)</noscript>
+          <p>This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</p>
+        </footer>
+    </body>
+</html>

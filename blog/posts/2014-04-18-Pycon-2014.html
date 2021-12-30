@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>michtran.ca/blog - Pycon 2014!</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../../blog">michtran.ca/blog</a>
+            </div>
+            <div id="navigation">
+                <a href="../../blog/about.html">About</a>
+                <a href="../../">Find</a>
+                <a href="../../blog/archive.html">Archive</a>
+                <a href="../../atom.xml">Atom</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Pycon 2014!</h1>
+
+            <div class="info">
+<em>Posted on April 18, 2014</em>
+    
+</div>
+
+<p>Pycon was held in Montreal this year and I decided to take a more active role. Rather than merely sitting in the conference watching people talk, I decided to be slightly more proactive by participating in the functioning of the conference by volunteering to chair some talks during the conference. Here I will list some of what I learned from the conference</p>
+<!--more-->
+<h1>
+Contributing to Open Source
+</h1>
+One of my goals this year was to become more involved with open source. I attended Jessica McKellar’s <a href="https://us.pycon.org/2014/schedule/presentation/59/">“Contribute with me! Getting started with open source development”</a> tutorial and Elena William’s <a href="https://us.pycon.org/2014/schedule/presentation/196/">“Hitchhikers Guide to Participating in Open Source”</a>. The tutorial was more hands on and practical, which gave me some context in which I can start asking the right questions (and finding the right people for help) whereas the talk was more about rallying excitement for open source. Both were good overviews about how open source projects are structured and how to get started. One good resource for newbs (not noobs) at open source is <a href="https://openhatch.org/">openhatch.org</a>. If Jessica McKellar is doing the tutorial again next year, I would definitely recommend it to whoever wants to get involved in open source (but is too scared).
+<h1>
+Great talk about datastructures in python
+</h1>
+“All your ducks in a row: Data Structures in the Standard Library and Beyond” by Brandon Rhodes was my favourite talk in the conference and warrants its own section in this article. The talk gives an overview of how data structures are implemented and some caveats to using them.
+<ul>
+<pre><code>&lt;li&gt;lists are dangerous because we assume one index operation (such as append or insert) will only affect that one element. In truth, because dynamically sized lists are amortized (ie. they allocate a set size then once that size is reached, they allocated an array of x times the original and copy all information over) it may not be as efficient.&lt;/li&gt;
+&lt;li&gt;dictionaries are amortized differently than lists, and hence much more performant (but space inefficient) than lists. Luckily this translate to expected behaviour.&lt;/li&gt;
+&lt;li&gt;other datastructures I've never used : OrderedDict, bisect, deque, queue, heapq, priorityqueue, scheduler...&lt;/li&gt;
+&lt;li&gt;traditional uses of trees are now outsourced to databases. It doesn't make sense why we get asked this question in programming interviews anymore.&lt;/li&gt;</code></pre>
+</ul>
+<h1>
+Data Science talks
+</h1>
+<p>There were dozens of data science talks this year. One interesting one was “Enough Machine Learning to Make Hacker News Readable Again” by Ned Jackson Lovely. I sympathized with the premise as it is very difficult to find articles worth reading when are constantly bombarded with content. In this talk I learned that we can use scikitlearn’s pipeline to specify a workflow for our data and that scikitlearn also have GridSearch to try out different parameters for turning machine learning models.</p>
+<p>Another talk of note was “Analyzing Rap Lyrics with Python” by Julie Lavoie. This was the only talk that I chaired and that I was able to pay attention to at the same time. The talk was hilarious and also interesting because it brought about conclusions that you find unintuitive (ie. the most misogynistic rappers do not use the word “bitch” with high freqency versus female rappers who use it more than most male rappers). There was some twitter controversy about the Q&amp;A period where someone thought that the men who asked questions were being patronizing and did not ask good questions (admittedly I thought the Q&amp;A session was pretty bad… especially the guy who was nervously awkward). However that’s how Q&amp;A goes… sometimes there are no insightful questions, especially before lunch.</p>
+<p>Unfortunately I did not attend “Diving into Open Data with IPython Notebook &amp; Pandas” by Julie Evans (I had already attended her talk at Pycon Canada in August, 2013) but I heard rave reviews about it.</p>
+Titus Brown (one of my favourite speakers along with Hynek Schlawack) gave a talk on “Data Intensive Biology in the cloud: Instrumenting ALL the things” which was a great talk on working with big data in the cloud in general. The takeaway from this talk is that rackspace has better machines than AWS (but more costly) and that solutions to process large datasets (such as hadoop or multithread) don’t actually save in performance (because IO bound). This kind of ties into his talk last year on reducing dimensionality of dataset, rather than using the full “big dataset”.
+<h1>
+Imposter Syndrome talk
+</h1>
+I also have to highlight this talk by Julie Pagano titled : “It’s Dangerous to go Alone: Battling the Invisible Monsters in Tech”. This was a talk generally about “imposter syndrome”. Normally I am very skeptical about imposter syndrome (because the phrase claims some sort of scientific authority but the idea feels pseudo-scientific and too self-diagnostic), but this talk definitely resonated with me. The message of helping others to gain confidence in your abilities is great advice for noticing how much knowledge and skills you actually have.
+<h1>
+Keynotes notes
+</h1>
+<p>Fernando Perez’s keynote on IPython was definitely the most enlightening keynote of the conference. He showed us the full breadth of IPython and got everyone excited to use it (omg, you can embed R in IPython!). I even signed up for the IPython sprint and almost contributed something!</p>
+Guido van Rossum’s keynote was also pretty hilarious. He coded his own Q&amp;A random generator in front of everyone and would only accept talks from women in the audience (which I found hilarious, but not sure if it contributes to equality for women in the tech community).
+<h1>
+Lastly…
+</h1>
+I would like to note that a [large company that I used to work for] did not sponsor pycon this year. I was sort of surprised because these conferences are places where you recruit engineering talent (away from other companies). Thinking back, the person who was in charge of getting sponsorship was working for a direct competitor, so that might be the reason for the absence.
+<h2>
+Next steps
+</h2>
+Although I stepped out of my comfort zone (a little bit) for this conference, I really could be doing more. So some of the things I should consider next year:
+<ul>
+<li>
+more networking, less board games
+</li>
+<li>
+become more confident with public speaking, and maybe even give a lightning talk
+</li>
+<li>
+participate more in sprints, and get to know people
+</li>
+</ul>
+<p>Most of the problems I’ve had is due to not being outgoing enough, so next year I need to change that!</p>
+
+        </div>
+        <footer>
+          <noscript>:)</noscript>
+          <p>This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</p>
+        </footer>
+    </body>
+</html>
