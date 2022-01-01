@@ -5,10 +5,6 @@ build:
 	stack build
 	stack exec site build
 
-upload: build
-	tar cfvz blog.tar.gz _site
-	scp blog.tar.gz michtran@michtran.ca:~/
-
 rebuild:
 	stack exec site rebuild
 
