@@ -8,8 +8,56 @@
         <name>Michelle Tran</name>
         <email>email@michtran.ca</email>
     </author>
-    <updated>2022-01-01T00:00:00Z</updated>
+    <updated>2022-02-14T00:00:00Z</updated>
     <entry>
+    <title>So my Computer Broke in 2022...</title>
+    <link href="http://michtran.ca/blog//blog/posts/2022-02-14-new-computer.html" />
+    <id>http://michtran.ca/blog//blog/posts/2022-02-14-new-computer.html</id>
+    <published>2022-02-14T00:00:00Z</published>
+    <updated>2022-02-14T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+<em>Posted on February 14, 2022</em>
+    
+</div>
+
+<p>For the past 5 years, my main computer has been a 15&quot; Macbook Pro. It was the computer that I acquired through work, which I then purchased off of them when I left. For a personal device, it is way over powered. Most of my computer needs are:</p>
+<ul>
+<li>watching videos</li>
+<li>web surfing</li>
+<li>online banking</li>
+<li>buying stuff online</li>
+<li>lightweight editor (mostly to modify markdown files)</li>
+<li>ssh for managing various servers</li>
+<li>portability for when I went went travelling, and/or around the house</li>
+</ul>
+<p>As my Macbook’s battery is on the verge of explosion, I had the option to re-evaluate my computing options and potentially save some money.</p>
+<p>So… what devices do I still have…</p>
+<h2 id="my-old-haxxor-lenovo-t420s">My old haxxor Lenovo T420s…</h2>
+<p>The first thing I dug into was my old T420s. I shamelessly installed it back in 2016 with Debian and Xmonad. That was back when I actually had time on my hands.</p>
+<p>So, coming back to this super custom machine in 2022, I had already forgotten how to use it. Luckily, I wrote a blog article on how I got it to work (like <code>wicd</code> to connect to internet) so I was able to reverse engineer stuff I did to make the computer mildly usable. But it made me think about how I gradually made my Macbook pro my main computer over time because it <em>just worked</em>.</p>
+<p>As I grow older with limited capacity to learn and customize my habits, the mental overhead of these super cool custom things isn’t really worth the time.</p>
+<p>Is a tiling window manager cool? Yes. But it’s also extra knowledge that I need to invest time into making a habit. Not to mention that it’s not exactly transferable. Knowing how to use this super customized computer will not translate to knowing how to use any random computer. So, this was a long winded way to say that I’m unlikely to install a TWM again in my next computer.</p>
+<p>The other annoyance is that the hard drive is also end of life. It’s an SSD I bought around 2013, and although I stayed up late to reinstall it with a more usable OS, (was super nostalgic… reminded me of late nights waiting for things to work) it still ran too slowly for me. So in order for me to make this work as a main device, I’ll at least need to get a new hard drive.</p>
+<p>The last annoyance is that the battery is pretty unusable, so I can’t expect to be able to use it away from a power source. However, at least the machine works without a battery, which is better than the modern laptops/devices that can’t run at all when the battery dies.</p>
+<h2 id="my-phone-is-also-a-computer">My phone is also a computer</h2>
+<p>Most of my browsing is currently on my phone. Admittedly, my phone is probably powerful enough for most of my everyday computer needs. It is super portable, has a decent browser and I already sometimes use it to play videos and music.</p>
+<p>The problem is that my phone screen is annoyingly small for any terminal work. Also, it’s the device that I’m most likely to lose, so I probably don’t want to put too many of my secret keys on it. It’s probably best suited as an emergency backup device.</p>
+<h2 id="how-about-my-work-laptop">How about my work laptop?</h2>
+<p>My work laptop has too much spyware. So having personal stuff on it is out of the question.</p>
+<h2 id="samsung-galaxy-tab-s2">Samsung Galaxy Tab S2</h2>
+<p>I inherited this relatively old tablet (2015) earlier this year. I use it mainly to show videos to my toddler. But, there were a few things that I was able to do to make it feel more like a laptop.</p>
+<p>I was able to connect my wired ErgoDox keyboard via a micro-USB dongle that we bought many years ago.</p>
+<p>Development apps need to be downloaded via F-droid. The apps downloaded through Google Play didn’t work due to Google’s weirdness around permissions.</p>
+<p>But I was able to get SSH access through Termux, and draft this blog article via GitJournal. I can upload this blog article to my GitHub Pages site by using <code>mgit</code> and do random code fixes via Acode. So current status: can blog.</p>
+<p>The only downsides of this tablet is that the battery life is pretty bad (that was exactly the reason why the original owner gave it to me). Also, I can’t charge it on my desk because I don’t have a micro-USB cable that is long enough to go from my desk to the power outlet. So I need to make sure the tablet is charged before I to use it for an extended amount of time.</p>
+<p>The tablet also can’t multitask as well as a computer, which can be a plus or minus. It helps create focus, but is also annoying if I want to do many things at the same time.</p>
+<h2 id="what-now">What now?</h2>
+<p>My Macbook Pro is eligible for a free battery replacement. So I took it to the Apple Store to get it replaced. However, the part needs to be ordered internationally, so it’ll be a few weeks until it can be fixed.</p>
+<p>At the moment, using the tablet is good enough for my usual usage. But it’s probably not going to be sufficient for the long term. Or at least I need more time to see how it pans out.</p>
+<p>I’m probably due for a computer upgrade anyways. In all likelihood, I’m probably going to go for whatever new Macbook Air comes out this year.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Retrospective on 2021</title>
     <link href="http://michtran.ca/blog//blog/posts/2022-01-01-retrospective.html" />
     <id>http://michtran.ca/blog//blog/posts/2022-01-01-retrospective.html</id>
@@ -54,28 +102,6 @@
 <p>I managed to reach my reading goal this year. However, my reading has slowed down since I became a parent, so let’s see how it goes next year.</p>
 <p>I really miss travelling.</p>
 <p>I will be back to work in a few months, which I’m looking forward to. And hopefully with the vaccine discovered, next year will go back to something sort of resembling the life before the pandemic.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Retrospective on 2019</title>
-    <link href="http://michtran.ca/blog//blog/posts/2020-01-01-Retrospective_2019.html" />
-    <id>http://michtran.ca/blog//blog/posts/2020-01-01-Retrospective_2019.html</id>
-    <published>2020-01-01T00:00:00Z</published>
-    <updated>2020-01-01T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-<em>Posted on January  1, 2020</em>
-    
-</div>
-
-<p>I’ve been back in Toronto for one year now. Since I’m back in North America, I can’t say that I’ve travelled very much this year.</p>
-<p>I did take a short business trip to Ottawa in February. I got to see Carleton University (for the first time) and saw the unfinished subway.</p>
-<p>The biggest thing to have happened to me is that I changed jobs… again. There were a couple of reasons why I left the job, but the 2 main reasons were related to my commute (45 minutes each way) and a developing fear that I was not technically rounded enough to adapt to new technologies. So my new job is now much closer to home and is primarily using a different technology than what I’ve been programming in the past 6 years. I still have in my mind, an idea that I should try working in a consultancy at some point to get more technical breadth.</p>
-<p>I got my piano back this summer. I’ve been learning a few pieces, mostly Debussy and Chopin. In particular: Reverie (Debussy), Waltz in C# Minor (Chopin) Nocturne in Eb Major (Chopin), and Waltz in Ab Major (Chopin). Maybe someday I can play the Revolutionary Etude (Chopin) and Clair de Lune (Debussy).</p>
-<p>I’ve also given up on alcohol since October. The most surprising result from this was that it has saved me a lot of money (well, it should be obvious considering how expensive alcohol is here). I also haven’t really missed it very much, but that’s partly because I don’t socialize much anymore. I think I will probably go back to drinking at some point, but probably less than I use to drink when living in Europe.</p>
-<p>I’ve also got myself a new smart phone this year. It’s mostly for my new job, which requires me to be oncall regularly.</p>
-<p>I also managed to read up to 100 books this year. Admittedly, it became a pain as I got closer to 100 books. My goal is always only 52 books, and I always go past it with a wide margin. At some point when I reached 80 books this year, I thought that I should maybe really try to hit 100 books. However, I started only reading for the sake of hitting the goal and found myself <em>dreading</em> reading after my 100th book. Anyways, I hope to be less ambitious this year and not pressure myself to read when I don’t feel like it.</p>
-<p>Lastly, the only travelling I did this year was to a resort in Cuba over Christmas. It was underwhelming; lots of sun, sand and not much else otherwise. I regret going over Christmas, as I found that I had wished that I was with my family instead. Anyways, I will probably avoid going to resorts in the future and probably also not travel over Christmas.</p>
-<p>I kind of regret not focusing more on my health this year, so maybe I’ll try to exercise regularly and eating better. I also didn’t draw or paint much this year. Hopefully with the time saved on my commute, I will feel motivated to draw again.</p>
 ]]></summary>
 </entry>
 
