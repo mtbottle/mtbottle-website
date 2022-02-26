@@ -46,13 +46,13 @@
 <li>buying stuff online</li>
 <li>lightweight editor (mostly to modify markdown files)</li>
 <li>ssh for managing various servers</li>
-<li>portability for when I went went travelling, and/or around the house</li>
+<li>portability for when I went travelling, and/or around the house</li>
 </ul>
 <p>As my Macbook’s battery is on the verge of explosion, I had the option to re-evaluate my computing options and potentially save some money.</p>
 <p>So… what devices do I still have…</p>
 <h2 id="my-old-haxxor-lenovo-t420s">My old haxxor Lenovo T420s…</h2>
 <p>The first thing I dug into was my old T420s. I shamelessly installed it back in 2016 with Debian and Xmonad. That was back when I actually had time on my hands.</p>
-<p>So, coming back to this super custom machine in 2022, I had already forgotten how to use it. Luckily, I wrote a blog article on how I got it to work (like <code>wicd</code> to connect to internet) so I was able to reverse engineer stuff I did to make the computer mildly usable. But it made me think about how I gradually made my Macbook pro my main computer over time because it <em>just worked</em>.</p>
+<p>So, coming back to this super custom machine in 2022, I had already forgotten how to use it. Luckily, I wrote a blog article on how I got it to work (like <code>wicd</code> to connect to internet) so I was able to reverse engineer stuff I did to make the computer mildly usable. But it made me think about how I gradually made my Macbook Pro my main computer over time because it <em>just worked</em>.</p>
 <p>As I grow older with limited capacity to learn and customize my habits, the mental overhead of these super cool custom things isn’t really worth the time.</p>
 <p>Is a tiling window manager cool? Yes. But it’s also extra knowledge that I need to invest time into making a habit. Not to mention that it’s not exactly transferable. Knowing how to use this super customized computer will not translate to knowing how to use any random computer. So, this was a long winded way to say that I’m unlikely to install a TWM again in my next computer.</p>
 <p>The other annoyance is that the hard drive is also end of life. It’s an SSD I bought around 2013, and although I stayed up late to reinstall it with a more usable OS, (was super nostalgic… reminded me of late nights waiting for things to work) it still ran too slowly for me. So in order for me to make this work as a main device, I’ll at least need to get a new hard drive.</p>
