@@ -17,7 +17,7 @@ Most of my computer needs are:
 - buying stuff online
 - lightweight editor (mostly to modify markdown files)
 - ssh for managing various servers
-- portability for when I went went travelling, and/or around the house
+- portability for when I went travelling, and/or around the house
 
 As my Macbook's battery is on the verge of explosion,
 I had the option to re-evaluate my computing options
@@ -38,7 +38,7 @@ Luckily, I wrote a blog article on how I got it to work
 so I was able to reverse engineer stuff 
 I did to make the computer mildly usable. 
 But it made me think about how I gradually made 
-my Macbook pro my main computer over time because it _just worked_.
+my Macbook Pro my main computer over time because it _just worked_.
 
 As I grow older with limited capacity 
 to learn and customize my habits, 
