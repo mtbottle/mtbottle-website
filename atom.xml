@@ -8,8 +8,115 @@
         <name>Michelle Tran</name>
         <email>email@michtran.ca</email>
     </author>
-    <updated>2022-03-20T00:00:00Z</updated>
+    <updated>2022-10-29T00:00:00Z</updated>
     <entry>
+    <title>Elixir: An Exit Review</title>
+    <link href="http://michtran.ca/blog//blog/posts/2022-10-29-Elixir-Exit-Review.html" />
+    <id>http://michtran.ca/blog//blog/posts/2022-10-29-Elixir-Exit-Review.html</id>
+    <published>2022-10-29T00:00:00Z</published>
+    <updated>2022-10-29T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+<em>Posted on October 29, 2022</em>
+    
+</div>
+
+<p>I’ve resigned from my job at <code>$COMPANY_THAT_USES_ELIXIR</code> recently. And in my next role, Elixir will not be my primary programming language. Here are some of my thoughts after working with it for 3 years.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Elixir is a language that is based off of Erlang. This means that it uses the BEAM, which is the Erlang’s virtual machine and also follows Erlang’s OTP design principles.</p>
+<p>I went into the job not knowing much about the language, other than the fact that it was 1. functional and 2. saw that it was hyped on places like <code>lobste.rs</code> and our favourite orange tech news aggregation website.</p>
+<h2 id="what-i-liked">What I liked</h2>
+<h3 id="pattern-matching-and-guards">Pattern Matching and Guards</h3>
+<p>This simple feature makes programming so much more fun. I’ve mainly used this to substitute for conditionals. For example, handling different response statuses can look like this:</p>
+<pre><code>def handle_resp(%HTTPoison.Response{status_code: 200} = resp), do: ok(resp)
+
+def handle_resp(%HTTPoison.Response{status_code: 403} = resp), do: forbidden(resp)
+
+def handle_resp(%HTTPoison.Response{status_code: 400} = resp), do: not_found(resp)
+
+def handle_resp(%HTTPoison.Response{status_code: status} = resp) when status &gt;= 400 and status &lt; 500 do
+  user_error(resp)
+end
+
+# handles all other responses, including 3xx, 5xx
+def handle_resp(%HTTPoison.Response{} = resp), do: retry()</code></pre>
+<p>I’ve found this to be a super elegant way of differentiating the code paths without creating too many levels of indentation. Pattern matching is also super useful to get specific items from maps and more complex data structures too.</p>
+<h3 id="pipes">Pipes!</h3>
+<p>In particular, the structure of pipes naturally follows the order they’re executed. This makes it <em>so</em> much easier to read the code.</p>
+<p>For example, in a standard declarative language, you might write something like this:</p>
+<pre><code>last_func(
+    third_func(
+        second_func(
+            first_func(
+                param
+            )
+        )
+    )
+)</code></pre>
+<p>But with Elixir, this can be written much more elegantly:</p>
+<pre><code>param
+|&gt; first_func()
+|&gt; second_func()
+|&gt; third_func()
+|&gt; last_func()</code></pre>
+<p>More languages should adopt this.</p>
+<h2 id="what-im-not-sure-about">What I’m not sure about</h2>
+<h3 id="genservers-and-otp-design-generally">GenServers (and OTP design generally)</h3>
+<p>I was super excited to learn <a href="https://www.erlang.org/doc/design_principles/des_princ.html">about OTP</a> and building applications based on multiple processes. It’s a unique concept with interesting design implications. Thinking in terms of processes, their lifecycles and designing your data around immutability was a fascinating adventure into something completely unique from the standard object-oriented or even functional world.</p>
+<p>Although this was intellectually interesting, I don’t think I’ve actually seen it used to its full potential as we seldom needed to code our own GenServers in practice. So admittedly, although this was an interesting excursion into a new idea, I’m not sure I have seen a particularly notable usage of OTP.</p>
+<h3 id="interns-struggle">Interns Struggle</h3>
+<p>Throughout my 3 years at <code>$COMPANY_THAT_USES_ELIXIR</code>, I’ve found that interns, especially those that are on their first 4 month term with us, really struggle to grasp the language as quickly as other more common languages like Javascript or Python. I’m not entirely sure if my anecdotal evidence is indicative of anything, but it does suggest that there might be something inherent to Elixir that makes it harder for new coders to get started with. Some of my theories for why it’s harder:</p>
+<ol style="list-style-type: decimal">
+<li>Students are more likely to learn OOP at school</li>
+<li>OTP architectural design doesn’t translate well to more mainstream languages/patterns</li>
+<li>Elixir pattern matching, control flows and error handling also doesn’t translate well to more mainstream languages/patterns, which means that prior programming experience doesn’t map as well to patterns used in Elixir</li>
+<li>Four months is not long enough to get a good handle on the idiosyncrasies in the language</li>
+</ol>
+<p>I’ve found that interns on their second or third internship with <code>$COMPANY_THAT_USES_ELIXIR</code> tended to handle the tasks much better.</p>
+<h2 id="what-i-didnt-like">What I didn’t like</h2>
+<h3 id="with-statements">“with” Statements</h3>
+<p>I’ve actually grown a bit more ambivalent with this construct over time. I started to <em>really</em> hate this construct when I ran into some debugging annoyances. For example:</p>
+<pre><code>with {:ok, data}      &lt;- function_call(params),
+     {:ok, more_data} &lt;- function_call2(),
+do
+  whatever_here()
+else
+  {:error, :timeout} -&gt; {:error, :error_in_with_statement}
+end</code></pre>
+<p>It is impossible to know whether the <code>timeout</code> came from <code>function_call</code> or <code>function_call2</code>. So it’s incredibly hard to trace this call when all you see is <code>{:error, :error_in_with_statement}</code> (not to mention that Elixir’s debugging tools are not great).</p>
+<p>One way to get around this is to actually annotate each line like this:</p>
+<pre><code>with {:this_line, {:ok, data}}      &lt;- {:this_line, function_call(params)},
+     {:that_line, {:ok, more_data}} &lt;- {:that_line, function_call2()},
+do
+  whatever_here()
+else
+  {:this_line, {:error, :timeout}} -&gt; 
+    add_some_metrics(:this_line)
+    {:error, :error_in_with_statement}
+
+  {:that_line, {:error, :timeout}} -&gt; {:error, :error_in_with_statement}
+end</code></pre>
+<p>This is a reasonable to separate which line caught the error, but makes the code more repetitive (ie. <code>this_line</code> and <code>that_line</code> are repeated 3 times).</p>
+<p>I think that <code>with</code> is powerful when you really want to handle a class of errors the same way. Arguably, <code>timeouts</code> <em>should</em> probably be handled the same, but we still need to differentiate where they’re coming from for observability. We can probably use the clunky appended signifier to handle the error in the same way, but differentiated for observability purposes:</p>
+<pre><code>with {:this_line, {:ok, data}}      &lt;- {:this_line, function_call(params)},
+     {:that_line, {:ok, more_data}} &lt;- {:that_line, function_call2()},
+do
+  whatever_here()
+else
+  {line_signifier, {:error, :timeout}} -&gt;
+    add_some_metrics(line_signifier)
+    {:error, :error_in_with_statement}
+end</code></pre>
+<p>It’s still a bit repetitive, but gives us the observability for debugging. Anyways, I’ve come to terms that this isn’t <em>that</em> terrible. I’m not sure I <em>like</em> it that much, but I guess I no longer hate it.</p>
+<h3 id="lacking-good-third-party-support">Lacking good third party support</h3>
+<p>My criticism here is probably more on my ex-company rather than something inherent to Elixir itself.</p>
+<p>Elixir is still very immature, and hence, there is a clear lack of support for things that we take for granted in other more mature languages.</p>
+<p>This was admittedly, one of the final contributing factors to making me leave <code>$COMPANY_THAT_USES_ELIXIR</code> (there were several others reasons unrelated to Elixir). I was no longer excited with working in Elixir because third party libraries that we use <em>a lot</em> were poorly documented, hard to use, missing features, and there was little motivation in making it better (or, this was relatively low on the <em>“developer experience”</em> priority list).</p>
+<p>Specifically, we use Kafka <em>a lot</em>, but the choices were <code>kafkaex</code> (not super actively developed/maintained, and some known broken functionality) and <code>brod</code> (written in Erlang, poorly documented and cryptic error messages). Given how much we depend on Kafka and with the size and reputation of the company, I would say that it’s a huge disappointment to not see investment in making our own Kafka-Elixir integration.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>Although I ended on a particularly negative point, I really did enjoy coding in Elixir. I will miss the elegance in some of the language constructs but overall, I think I’ll be happier to work in a better supported language. I would definitely consider another job in Elixir as I enjoyed working in it more than other languages I’ve used in the past. If I were to go back to <code>$COMPANY_THAT_USES_ELIXIR</code>, I might even suggest taking ownership of (or forking) <code>kafkaex</code> or create our own open-sourced Kafka library in Elixir. It’s just a shame that I only thought about this after I left the company.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Project Risk and Time Estimation</title>
     <link href="http://michtran.ca/blog//blog/posts/2022-03-20-project_risk.html" />
     <id>http://michtran.ca/blog//blog/posts/2022-03-20-project_risk.html</id>
@@ -102,54 +209,6 @@
 <p>I think that reading a lot of books helps me build <em>intuition</em>. I may not remember exactly what lead me to think a certain way, but the accumulated knowledge of the thoroughly edited books that I’ve read leads me to having a better judgement on things.</p>
 <p>The classic example is fiction. There are studies that show that people who read a lot of fiction tends to be <a href="https://www.discovermagazine.com/mind/how-reading-fiction-increases-empathy-and-encourages-understanding">more empathetic</a>. Do we remember necessarily which character fits which real life person/situation? Probably not. But the accumulation of the experiences of characters that you read will give you a better understanding of the vast range of human thought.</p>
 <p>So, although I don’t retain most of what I read (and I’m also terrible with quoting books), I read because I enjoy reading and also because I’m building my intuition on whatever topic interests me.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>So my Computer Broke in 2022...</title>
-    <link href="http://michtran.ca/blog//blog/posts/2022-02-14-new-computer.html" />
-    <id>http://michtran.ca/blog//blog/posts/2022-02-14-new-computer.html</id>
-    <published>2022-02-14T00:00:00Z</published>
-    <updated>2022-02-14T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-<em>Posted on February 14, 2022</em>
-    
-</div>
-
-<p>For the past 5 years, my main computer has been a 15&quot; Macbook Pro. It was the computer that I acquired through work, which I then purchased off of them when I left. For a personal device, it is way over powered. Most of my computer needs are:</p>
-<ul>
-<li>watching videos</li>
-<li>web surfing</li>
-<li>online banking</li>
-<li>buying stuff online</li>
-<li>lightweight editor (mostly to modify markdown files)</li>
-<li>ssh for managing various servers</li>
-<li>portability for when I went travelling, and/or around the house</li>
-</ul>
-<p>As my Macbook’s battery is on the verge of explosion, I had the option to re-evaluate my computing options and potentially save some money.</p>
-<p>So… what devices do I still have…</p>
-<h2 id="my-old-haxxor-lenovo-t420s">My old haxxor Lenovo T420s…</h2>
-<p>The first thing I dug into was my old T420s. I shamelessly installed it back in 2016 with Debian and Xmonad. That was back when I actually had time on my hands.</p>
-<p>So, coming back to this super custom machine in 2022, I had already forgotten how to use it. Luckily, I wrote a blog article on how I got it to work (like <code>wicd</code> to connect to internet) so I was able to reverse engineer stuff I did to make the computer mildly usable. But it made me think about how I gradually made my Macbook Pro my main computer over time because it <em>just worked</em>.</p>
-<p>As I grow older with limited capacity to learn and customize my habits, the mental overhead of these super cool custom things isn’t really worth the time.</p>
-<p>Is a tiling window manager cool? Yes. But it’s also extra knowledge that I need to invest time into making a habit. Not to mention that it’s not exactly transferable. Knowing how to use this super customized computer will not translate to knowing how to use any random computer. So, this was a long winded way to say that I’m unlikely to install a TWM again in my next computer.</p>
-<p>The other annoyance is that the hard drive is also end of life. It’s an SSD I bought around 2013, and although I stayed up late to reinstall it with a more usable OS, (was super nostalgic… reminded me of late nights waiting for things to work) it still ran too slowly for me. So in order for me to make this work as a main device, I’ll at least need to get a new hard drive.</p>
-<p>The last annoyance is that the battery is pretty unusable, so I can’t expect to be able to use it away from a power source. However, at least the machine works without a battery, which is better than the modern laptops/devices that can’t run at all when the battery dies.</p>
-<h2 id="my-phone-is-also-a-computer">My phone is also a computer</h2>
-<p>Most of my browsing is currently on my phone. Admittedly, my phone is probably powerful enough for most of my everyday computer needs. It is super portable, has a decent browser and I already sometimes use it to play videos and music.</p>
-<p>The problem is that my phone screen is annoyingly small for any terminal work. Also, it’s the device that I’m most likely to lose, so I probably don’t want to put too many of my secret keys on it. It’s probably best suited as an emergency backup device.</p>
-<h2 id="how-about-my-work-laptop">How about my work laptop?</h2>
-<p>My work laptop has too much spyware. So having personal stuff on it is out of the question.</p>
-<h2 id="samsung-galaxy-tab-s2">Samsung Galaxy Tab S2</h2>
-<p>I inherited this relatively old tablet (2015) earlier this year. I use it mainly to show videos to my toddler. But, there were a few things that I was able to do to make it feel more like a laptop.</p>
-<p>I was able to connect my wired ErgoDox keyboard via a micro-USB dongle that we bought many years ago.</p>
-<p>Development apps need to be downloaded via F-droid. The apps downloaded through Google Play didn’t work due to Google’s weirdness around permissions.</p>
-<p>But I was able to get SSH access through Termux, and draft this blog article via GitJournal. I can upload this blog article to my GitHub Pages site by using <code>mgit</code> and do random code fixes via Acode. So current status: can blog.</p>
-<p>The only downsides of this tablet is that the battery life is pretty bad (that was exactly the reason why the original owner gave it to me). Also, I can’t charge it on my desk because I don’t have a micro-USB cable that is long enough to go from my desk to the power outlet. So I need to make sure the tablet is charged before I to use it for an extended amount of time.</p>
-<p>The tablet also can’t multitask as well as a computer, which can be a plus or minus. It helps create focus, but is also annoying if I want to do many things at the same time.</p>
-<h2 id="what-now">What now?</h2>
-<p>My Macbook Pro is eligible for a free battery replacement. So I took it to the Apple Store to get it replaced. However, the part needs to be ordered internationally, so it’ll be a few weeks until it can be fixed.</p>
-<p>At the moment, using the tablet is good enough for my usual usage. But it’s probably not going to be sufficient for the long term. Or at least I need more time to see how it pans out.</p>
-<p>I’m probably due for a computer upgrade anyways. In all likelihood, I’m probably going to go for whatever new Macbook Air comes out this year.</p>
 ]]></summary>
 </entry>
 

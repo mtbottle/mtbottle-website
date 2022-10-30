@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>michtran.ca/blog - Elixir: An Exit Review</title>
+        <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="../../blog">michtran.ca/blog</a>
+            </div>
+            <div id="navigation">
+                <a href="../../blog/about.html">About</a>
+                <a href="../../">Find</a>
+                <a href="../../blog/archive.html">Archive</a>
+                <a href="../../atom.xml">Atom</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>Elixir: An Exit Review</h1>
+
+            <div class="info">
+<em>Posted on October 29, 2022</em>
+    
+</div>
+
+<p>I’ve resigned from my job at <code>$COMPANY_THAT_USES_ELIXIR</code> recently. And in my next role, Elixir will not be my primary programming language. Here are some of my thoughts after working with it for 3 years.</p>
+<h2 id="introduction">Introduction</h2>
+<p>Elixir is a language that is based off of Erlang. This means that it uses the BEAM, which is the Erlang’s virtual machine and also follows Erlang’s OTP design principles.</p>
+<p>I went into the job not knowing much about the language, other than the fact that it was 1. functional and 2. saw that it was hyped on places like <code>lobste.rs</code> and our favourite orange tech news aggregation website.</p>
+<h2 id="what-i-liked">What I liked</h2>
+<h3 id="pattern-matching-and-guards">Pattern Matching and Guards</h3>
+<p>This simple feature makes programming so much more fun. I’ve mainly used this to substitute for conditionals. For example, handling different response statuses can look like this:</p>
+<pre><code>def handle_resp(%HTTPoison.Response{status_code: 200} = resp), do: ok(resp)
+
+def handle_resp(%HTTPoison.Response{status_code: 403} = resp), do: forbidden(resp)
+
+def handle_resp(%HTTPoison.Response{status_code: 400} = resp), do: not_found(resp)
+
+def handle_resp(%HTTPoison.Response{status_code: status} = resp) when status &gt;= 400 and status &lt; 500 do
+  user_error(resp)
+end
+
+# handles all other responses, including 3xx, 5xx
+def handle_resp(%HTTPoison.Response{} = resp), do: retry()</code></pre>
+<p>I’ve found this to be a super elegant way of differentiating the code paths without creating too many levels of indentation. Pattern matching is also super useful to get specific items from maps and more complex data structures too.</p>
+<h3 id="pipes">Pipes!</h3>
+<p>In particular, the structure of pipes naturally follows the order they’re executed. This makes it <em>so</em> much easier to read the code.</p>
+<p>For example, in a standard declarative language, you might write something like this:</p>
+<pre><code>last_func(
+    third_func(
+        second_func(
+            first_func(
+                param
+            )
+        )
+    )
+)</code></pre>
+<p>But with Elixir, this can be written much more elegantly:</p>
+<pre><code>param
+|&gt; first_func()
+|&gt; second_func()
+|&gt; third_func()
+|&gt; last_func()</code></pre>
+<p>More languages should adopt this.</p>
+<h2 id="what-im-not-sure-about">What I’m not sure about</h2>
+<h3 id="genservers-and-otp-design-generally">GenServers (and OTP design generally)</h3>
+<p>I was super excited to learn <a href="https://www.erlang.org/doc/design_principles/des_princ.html">about OTP</a> and building applications based on multiple processes. It’s a unique concept with interesting design implications. Thinking in terms of processes, their lifecycles and designing your data around immutability was a fascinating adventure into something completely unique from the standard object-oriented or even functional world.</p>
+<p>Although this was intellectually interesting, I don’t think I’ve actually seen it used to its full potential as we seldom needed to code our own GenServers in practice. So admittedly, although this was an interesting excursion into a new idea, I’m not sure I have seen a particularly notable usage of OTP.</p>
+<h3 id="interns-struggle">Interns Struggle</h3>
+<p>Throughout my 3 years at <code>$COMPANY_THAT_USES_ELIXIR</code>, I’ve found that interns, especially those that are on their first 4 month term with us, really struggle to grasp the language as quickly as other more common languages like Javascript or Python. I’m not entirely sure if my anecdotal evidence is indicative of anything, but it does suggest that there might be something inherent to Elixir that makes it harder for new coders to get started with. Some of my theories for why it’s harder:</p>
+<ol style="list-style-type: decimal">
+<li>Students are more likely to learn OOP at school</li>
+<li>OTP architectural design doesn’t translate well to more mainstream languages/patterns</li>
+<li>Elixir pattern matching, control flows and error handling also doesn’t translate well to more mainstream languages/patterns, which means that prior programming experience doesn’t map as well to patterns used in Elixir</li>
+<li>Four months is not long enough to get a good handle on the idiosyncrasies in the language</li>
+</ol>
+<p>I’ve found that interns on their second or third internship with <code>$COMPANY_THAT_USES_ELIXIR</code> tended to handle the tasks much better.</p>
+<h2 id="what-i-didnt-like">What I didn’t like</h2>
+<h3 id="with-statements">“with” Statements</h3>
+<p>I’ve actually grown a bit more ambivalent with this construct over time. I started to <em>really</em> hate this construct when I ran into some debugging annoyances. For example:</p>
+<pre><code>with {:ok, data}      &lt;- function_call(params),
+     {:ok, more_data} &lt;- function_call2(),
+do
+  whatever_here()
+else
+  {:error, :timeout} -&gt; {:error, :error_in_with_statement}
+end</code></pre>
+<p>It is impossible to know whether the <code>timeout</code> came from <code>function_call</code> or <code>function_call2</code>. So it’s incredibly hard to trace this call when all you see is <code>{:error, :error_in_with_statement}</code> (not to mention that Elixir’s debugging tools are not great).</p>
+<p>One way to get around this is to actually annotate each line like this:</p>
+<pre><code>with {:this_line, {:ok, data}}      &lt;- {:this_line, function_call(params)},
+     {:that_line, {:ok, more_data}} &lt;- {:that_line, function_call2()},
+do
+  whatever_here()
+else
+  {:this_line, {:error, :timeout}} -&gt; 
+    add_some_metrics(:this_line)
+    {:error, :error_in_with_statement}
+
+  {:that_line, {:error, :timeout}} -&gt; {:error, :error_in_with_statement}
+end</code></pre>
+<p>This is a reasonable to separate which line caught the error, but makes the code more repetitive (ie. <code>this_line</code> and <code>that_line</code> are repeated 3 times).</p>
+<p>I think that <code>with</code> is powerful when you really want to handle a class of errors the same way. Arguably, <code>timeouts</code> <em>should</em> probably be handled the same, but we still need to differentiate where they’re coming from for observability. We can probably use the clunky appended signifier to handle the error in the same way, but differentiated for observability purposes:</p>
+<pre><code>with {:this_line, {:ok, data}}      &lt;- {:this_line, function_call(params)},
+     {:that_line, {:ok, more_data}} &lt;- {:that_line, function_call2()},
+do
+  whatever_here()
+else
+  {line_signifier, {:error, :timeout}} -&gt;
+    add_some_metrics(line_signifier)
+    {:error, :error_in_with_statement}
+end</code></pre>
+<p>It’s still a bit repetitive, but gives us the observability for debugging. Anyways, I’ve come to terms that this isn’t <em>that</em> terrible. I’m not sure I <em>like</em> it that much, but I guess I no longer hate it.</p>
+<h3 id="lacking-good-third-party-support">Lacking good third party support</h3>
+<p>My criticism here is probably more on my ex-company rather than something inherent to Elixir itself.</p>
+<p>Elixir is still very immature, and hence, there is a clear lack of support for things that we take for granted in other more mature languages.</p>
+<p>This was admittedly, one of the final contributing factors to making me leave <code>$COMPANY_THAT_USES_ELIXIR</code> (there were several others reasons unrelated to Elixir). I was no longer excited with working in Elixir because third party libraries that we use <em>a lot</em> were poorly documented, hard to use, missing features, and there was little motivation in making it better (or, this was relatively low on the <em>“developer experience”</em> priority list).</p>
+<p>Specifically, we use Kafka <em>a lot</em>, but the choices were <code>kafkaex</code> (not super actively developed/maintained, and some known broken functionality) and <code>brod</code> (written in Erlang, poorly documented and cryptic error messages). Given how much we depend on Kafka and with the size and reputation of the company, I would say that it’s a huge disappointment to not see investment in making our own Kafka-Elixir integration.</p>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>Although I ended on a particularly negative point, I really did enjoy coding in Elixir. I will miss the elegance in some of the language constructs but overall, I think I’ll be happier to work in a better supported language. I would definitely consider another job in Elixir as I enjoyed working in it more than other languages I’ve used in the past. If I were to go back to <code>$COMPANY_THAT_USES_ELIXIR</code>, I might even suggest taking ownership of (or forking) <code>kafkaex</code> or create our own open-sourced Kafka library in Elixir. It’s just a shame that I only thought about this after I left the company.</p>
+
+        </div>
+        <footer>
+          <noscript>:)</noscript>
+          <p>This website is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</p>
+        </footer>
+    </body>
+</html>
