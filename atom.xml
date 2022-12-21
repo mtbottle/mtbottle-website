@@ -62,9 +62,9 @@ def handle_resp(%HTTPoison.Response{} = resp), do: retry()</code></pre>
 <h2 id="what-im-not-sure-about">What I’m not sure about</h2>
 <h3 id="genservers-and-otp-design-generally">GenServers (and OTP design generally)</h3>
 <p>I was super excited to learn <a href="https://www.erlang.org/doc/design_principles/des_princ.html">about OTP</a> and building applications based on multiple processes. It’s a unique concept with interesting design implications. Thinking in terms of processes, their lifecycles and designing your data around immutability was a fascinating adventure into something completely unique from the standard object-oriented or even functional world.</p>
-<p>Although this was intellectually interesting, I don’t think I’ve actually seen it used to its full potential as we seldom needed to code our own GenServers in practice. So admittedly, although this was an interesting excursion into a new idea, I’m not sure I have seen a particularly notable usage of OTP.</p>
-<h3 id="interns-struggle">Interns Struggle</h3>
-<p>Throughout my 3 years at <code>$COMPANY_THAT_USES_ELIXIR</code>, I’ve found that interns, especially those that are on their first 4 month term with us, really struggle to grasp the language as quickly as other more common languages like Javascript or Python. I’m not entirely sure if my anecdotal evidence is indicative of anything, but it does suggest that there might be something different with Elixir that makes it harder for new coders to get started with. Some of my theories for why it’s harder:</p>
+<p>Although this was intellectually interesting, I don’t think I’ve actually seen it used to its full potential as we seldom needed to code our own GenServers. So admittedly, although this was an interesting excursion into a new idea, I’m not sure I have seen a particularly notable usage of OTP.</p>
+<h3 id="interns-struggle-to-onboard">Interns Struggle to Onboard</h3>
+<p>Throughout my 3 years at <code>$COMPANY_THAT_USES_ELIXIR</code>, I’ve found that interns, especially those that are on their first 4 month term with us, really struggle to grasp the language as quickly as other more common languages like Javascript or Python. I’m not entirely sure if my anecdotal evidence is indicative of anything, but it does suggest that there might be something different with Elixir that makes it harder for new coders to get started. Some of my theories for why it’s harder:</p>
 <ol style="list-style-type: decimal">
 <li>Students are more likely to learn OOP at school</li>
 <li>OTP architectural design doesn’t translate well to more mainstream languages/patterns</li>
@@ -75,37 +75,37 @@ def handle_resp(%HTTPoison.Response{} = resp), do: retry()</code></pre>
 <h2 id="what-i-didnt-like">What I didn’t like</h2>
 <h3 id="with-statements">“with” Statements</h3>
 <p>I’ve actually grown a bit more ambivalent with this construct over time. I started to <em>really</em> hate this construct when I ran into some debugging annoyances. For example:</p>
-<pre><code>with {:ok, data}      &lt;- function_call(params),
-     {:ok, more_data} &lt;- function_call2(),
-do
+<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">with {<span class="st">:ok</span>, data}      &lt;- function_call(params),
+     {<span class="st">:ok</span>, more_data} &lt;- function_call2(),
+<span class="kw">do</span>
   whatever_here()
-else
-  {:error, :timeout} -&gt; {:error, :error_in_with_statement}
-end</code></pre>
+<span class="kw">else</span>
+  {<span class="st">:error</span>, <span class="st">:timeout</span>} -&gt; {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
+<span class="kw">end</span></code></pre></div>
 <p>It is impossible to know whether the <code>timeout</code> came from <code>function_call</code> or <code>function_call2</code>. So it’s incredibly hard to trace this call when all you see is <code>{:error, :error_in_with_statement}</code> (not to mention that Elixir’s debugging tools are not great).</p>
 <p>One way to get around this is to actually annotate each line like this:</p>
-<pre><code>with {:this_line, {:ok, data}}      &lt;- {:this_line, function_call(params)},
-     {:that_line, {:ok, more_data}} &lt;- {:that_line, function_call2()},
-do
+<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">with {<span class="st">:this_line</span>, {<span class="st">:ok</span>, data}}      &lt;- {<span class="st">:this_line</span>, function_call(params)},
+     {<span class="st">:that_line</span>, {<span class="st">:ok</span>, more_data}} &lt;- {<span class="st">:that_line</span>, function_call2()},
+<span class="kw">do</span>
   whatever_here()
-else
-  {:this_line, {:error, :timeout}} -&gt; 
-    add_some_metrics(:this_line)
-    {:error, :error_in_with_statement}
+<span class="kw">else</span>
+  {<span class="st">:this_line</span>, {<span class="st">:error</span>, <span class="st">:timeout</span>}} -&gt; 
+    add_some_metrics(<span class="st">:this_line</span>)
+    {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
 
-  {:that_line, {:error, :timeout}} -&gt; {:error, :error_in_with_statement}
-end</code></pre>
+  {<span class="st">:that_line</span>, {<span class="st">:error</span>, <span class="st">:timeout</span>}} -&gt; {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
+<span class="kw">end</span></code></pre></div>
 <p>This is a reasonable to separate which line caught the error, but makes the code more repetitive (ie. <code>this_line</code> and <code>that_line</code> are repeated 3 times).</p>
 <p>I think that <code>with</code> is powerful when you really want to handle a class of errors the same way. Arguably, <code>timeouts</code> <em>should</em> probably be handled the same, but we still need to differentiate where they’re coming from for observability. We can probably use the clunky appended signifier to handle the error in the same way, but differentiated for observability purposes:</p>
-<pre><code>with {:this_line, {:ok, data}}      &lt;- {:this_line, function_call(params)},
-     {:that_line, {:ok, more_data}} &lt;- {:that_line, function_call2()},
-do
+<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">with {<span class="st">:this_line</span>, {<span class="st">:ok</span>, data}}      &lt;- {<span class="st">:this_line</span>, function_call(params)},
+     {<span class="st">:that_line</span>, {<span class="st">:ok</span>, more_data}} &lt;- {<span class="st">:that_line</span>, function_call2()},
+<span class="kw">do</span>
   whatever_here()
-else
-  {line_signifier, {:error, :timeout}} -&gt;
+<span class="kw">else</span>
+  {line_signifier, {<span class="st">:error</span>, <span class="st">:timeout</span>}} -&gt;
     add_some_metrics(line_signifier)
-    {:error, :error_in_with_statement}
-end</code></pre>
+    {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
+<span class="kw">end</span></code></pre></div>
 <p>It’s still a bit repetitive, but gives us the observability for debugging. Anyways, I’ve come to terms that this isn’t <em>that</em> terrible. I’m not sure I <em>like</em> it that much, but I guess I no longer hate it.</p>
 <h3 id="lacking-good-third-party-support">Lacking good third party support</h3>
 <p>My criticism here is probably more on my ex-company rather than something inherent to Elixir itself.</p>
@@ -113,7 +113,7 @@ end</code></pre>
 <p>This was admittedly, one of the final contributing factors to making me leave <code>$COMPANY_THAT_USES_ELIXIR</code> (there were several others reasons unrelated to Elixir). I was no longer excited with working in Elixir because third party libraries that we use <em>a lot</em> were poorly documented, hard to use, missing features, and there was little motivation in making it better (or, this was relatively low on the <em>“developer experience”</em> priority list).</p>
 <p>Specifically, we use Kafka <em>a lot</em>, but the choices were <code>kafkaex</code> (not super actively developed/maintained, and some known broken functionality) and <code>brod</code> (written in Erlang, poorly documented and cryptic error messages). Given how much we depend on Kafka and with the size and reputation of the company, I would say that it’s a huge disappointment to not see investment in making our own Kafka-Elixir integration.</p>
 <h2 id="final-thoughts">Final Thoughts</h2>
-<p>Although I ended on a particularly negative point, I really did enjoy coding in Elixir. I will miss the elegance in some of the language constructs but overall, I think I’ll be happier to work in a better supported language. I would definitely consider another job in Elixir as I enjoyed working in it more than other languages I’ve used in the past. If I were to go back to <code>$COMPANY_THAT_USES_ELIXIR</code>, I might even suggest taking ownership of (or forking) <code>kafkaex</code> or create our own open-sourced Kafka library in Elixir. It’s just a shame that I only thought about this after I left the company.</p>
+<p>Although I ended on a particularly negative point, I really did enjoy coding in Elixir. I will miss the elegance in some of the language constructs but overall, I think I’ll be happier to work in a better supported language. I would definitely consider another job in Elixir as I had enjoyed working in it more than other languages I’ve used in the past. If I were to go back to <code>$COMPANY_THAT_USES_ELIXIR</code>, I might even suggest taking ownership of (or forking) <code>kafkaex</code> or create our own open-sourced Kafka library in Elixir. It’s just a shame that I only thought about this after I left the company.</p>
 ]]></summary>
 </entry>
 <entry>
@@ -127,18 +127,18 @@ end</code></pre>
     
 </div>
 
-<p>After years of leading projects, I feel like I’ve finally stopped having an aversion to setting time estimates, and have accepted that they’re a necessary part of project management. Giving these values always feel like I’m just making up a number for the sake of putting in a deadline (ie. <em>bullshitting</em> my way through to project completion). However a shift of mindset from being <em>accurate</em> to doing better <em>expectation management</em> made it easier to accept that putting in a projected deadline is not really that bad.</p>
+<p>After years of leading projects, I feel like I’ve finally stopped having an aversion to setting time estimates, and have accepted that they’re a necessary part of project management. Giving these values always feel like I’m just making up a number for the sake of putting in a deadline (ie. <em>bullshitting</em> my way through to project completion). However a shift of mindset from being <em>accurate</em> to doing better <em>expectation management</em> made it easier to accept that forecasting a deadline is not really that bad.</p>
 <p>So this is an article about how I’ve come to not be scared off by work estimation.</p>
 <h2 id="why-it-is-important-to-give-a-target-completion">Why it is important to give a target completion</h2>
 <p>I will admit that giving a completion estimation is in many ways, <em>actually</em> quite arbitrary. There will be many factors that you will not be able to control, like one of your team member’s employment status or unpredictable increase in oncall reactive maintenance. So, deadlines can shift based on these factors.</p>
-<p>However, the importance of giving a target completion, (even when we all know that they tend to slip), is that you can set some expectations to other people in the organization about when they might expect a particular feature. For instance, the sales department will need to know when a feature is going to launch so that they know when they can start “selling” the feature. Customer support will need to know when the feature launch so that they can collate the training materials required to train up customer support agents before the feature is actually launched. We don’t launch in a vacuum. We have other groups relying on what’s coming. If we miss our target, it will affect the delivery of these other dependencies.</p>
+<p>However, the importance of giving a target completion, (even when we all know that they tend to slip), is that you can set some expectations to other people in the organization about when they can expect a particular feature to be complete. For instance, the sales department will need to know when a feature is ready to launch so that they know when they can start “selling” the feature. Customer support will need to know when the feature will launch so that they can collate the training materials required to train up customer support agents on that new feature before it it out. We don’t launch in a vacuum. We have other groups relying on what’s coming. If we miss our target, it will affect the delivery of these other dependencies.</p>
 <h2 id="is-there-value-in-work-estimation">Is there value in work estimation?</h2>
 <p>I have yet to find a good technique to do work estimation in a project well. Generally I found that the better you understand the problem/technology/code/team members, the better your technical breakdown, which means the better your estimate. The more details you can get in your plan, the better the estimate.</p>
 <p>The work breakdown and estimation is generally a good start as the initial estimate. This is usually the number I’m most iffy about because there are lots of caveats about the estimation. For instance, if you need to collaborate with another team then the assumption is that there will be <em>no friction</em> between how the developers in each team work together. Or there might be something that we thought was easy, but has turned out more complex than initially planned.</p>
 <p>So when I do time or work estimation now, I usually give the work estimation <em>with</em> some sort of risk assessment.</p>
 <h2 id="time-estimation-is-about-risk-management">Time Estimation is about Risk Management</h2>
 <p>So this leads me to my central thesis: time estimation is about expectation management is about risk management. Using the transitive property on the previous statement, <em>time estimation is about risk management</em>.</p>
-<p>Project risk usually occurs in 2 forms:</p>
+<p>Project risks usually occur in 2 forms:</p>
 <ul>
 <li>Planning risk</li>
 <li>Execution risk</li>
@@ -188,7 +188,7 @@ end</code></pre>
 <li>eat the risk and deal with it after the project. We need to ensure that track this risk and add it to our backlog.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
-<p>I’ve got a system that currently works for me. Being explicit about risks help set the expectation to stakeholders, and the regular communication builds trust with management. Ultimately, I think this is what matters most in managing projects in a corporate environment. It’s kind of a change from start-up life, where you just hack your way to a product. But when you’ve got more moving pieces to juggle, risk management is the key to giving better time estimates for project completion.</p>
+<p>I’ve got a system that currently works for me. Being explicit about risks helps to set the expectation to stakeholders, and the regular communication builds trust with management. Ultimately, I think this is what matters most in managing projects in a corporate environment. It’s kind of a change from the start-up life, where you just hack your way to a product. But when you’ve got more moving pieces to juggle, risk management is the key to giving better time estimates for project completion.</p>
 <hr />
 <p><em>Acknowledgement:</em> Thanks to Dennis Poon for helping me refine the ideas and thinking through planning vs execution risks.</p>
 ]]></summary>
