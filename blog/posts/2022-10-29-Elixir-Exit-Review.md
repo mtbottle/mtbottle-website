@@ -94,11 +94,11 @@ from the standard object-oriented or even functional world.
 
 Although this was intellectually interesting,
 I don't think I've actually seen it used to its full potential
-as we seldom needed to code our own GenServers in practice.
+as we seldom needed to code our own GenServers.
 So admittedly, although this was an interesting excursion into a new idea,
 I'm not sure I have seen a particularly notable usage of OTP.
 
-### Interns Struggle
+### Interns Struggle to Onboard
 
 Throughout my 3 years at `$COMPANY_THAT_USES_ELIXIR`, I've found that interns,
 especially those that are on their first 4 month term with us,
@@ -106,7 +106,7 @@ really struggle to grasp the language as quickly as other more common languages
 like Javascript or Python.
 I'm not entirely sure if my anecdotal evidence is indicative of anything,
 but it does suggest that there might be something different with Elixir
-that makes it harder for new coders to get started with.
+that makes it harder for new coders to get started.
 Some of my theories for why it's harder:
 
 1. Students are more likely to learn OOP at school
@@ -128,7 +128,7 @@ I've actually grown a bit more ambivalent with this construct over time.
 I started to _really_ hate this construct when I ran into some debugging annoyances.
 For example:
 
-```
+```elixir
 with {:ok, data}      <- function_call(params),
      {:ok, more_data} <- function_call2(),
 do
@@ -144,7 +144,7 @@ So it's incredibly hard to trace this call when all you see is `{:error, :error_
 
 One way to get around this is to actually annotate each line like this:
 
-```
+```elixir
 with {:this_line, {:ok, data}}      <- {:this_line, function_call(params)},
      {:that_line, {:ok, more_data}} <- {:that_line, function_call2()},
 do
@@ -167,7 +167,7 @@ but we still need to differentiate where they're coming from for observability.
 We can probably use the clunky appended signifier to handle the error in the same way,
 but differentiated for observability purposes:
 
-```
+```elixir
 with {:this_line, {:ok, data}}      <- {:this_line, function_call(params)},
      {:that_line, {:ok, more_data}} <- {:that_line, function_call2()},
 do
@@ -196,14 +196,14 @@ we take for granted in other more mature languages.
 This was admittedly, one of the final contributing factors to making me leave `$COMPANY_THAT_USES_ELIXIR`
 (there were several others reasons unrelated to Elixir).
 I was no longer excited with working in Elixir
-because third party libraries that we use *a lot*
+because third party libraries that we use _a lot_
 were poorly documented,
 hard to use,
 missing features,
 and there was little motivation in making it better
 (or, this was relatively low on the _"developer experience"_ priority list).
 
-Specifically, we use Kafka *a lot*,
+Specifically, we use Kafka _a lot_,
 but the choices were `kafkaex` (not super actively developed/maintained, and some known broken functionality)
 and `brod` (written in Erlang, poorly documented and cryptic error messages).
 Given how much we depend on Kafka
@@ -217,7 +217,7 @@ I really did enjoy coding in Elixir.
 I will miss the elegance in some of the language constructs
 but overall, I think I'll be happier to work in a better supported language.
 I would definitely consider another job in Elixir
-as I enjoyed working in it more than other languages I've used in the past.
+as I had enjoyed working in it more than other languages I've used in the past.
 If I were to go back to `$COMPANY_THAT_USES_ELIXIR`,
 I might even suggest taking ownership of (or forking) `kafkaex`
 or create our own open-sourced Kafka library in Elixir.

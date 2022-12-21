@@ -8,12 +8,12 @@ modified: 2022-02-26T08:33:00-05:00
 After years of leading projects,
 I feel like I've finally stopped having an aversion to setting time estimates,
 and have accepted that they're a necessary part of project management.
-Giving these values always feel like I'm just 
+Giving these values always feel like I'm just
 making up a number for the sake of putting in a deadline
 (ie. _bullshitting_ my way through to project completion).
 However a shift of mindset from being _accurate_
 to doing better _expectation management_
-made it easier to accept that putting in a projected deadline
+made it easier to accept that forecasting a deadline
 is not really that bad.
 
 So this is an article about how I've come to not be scared off by work estimation.
@@ -31,12 +31,12 @@ So, deadlines can shift based on these factors.
 However, the importance of giving a target completion,
 (even when we all know that they tend to slip),
 is that you can set some expectations to other people
-in the organization about when they might expect a particular feature.
+in the organization about when they can expect a particular feature
+to be complete.
 For instance, the sales department will need to know when a feature
-is going to launch so that they know when they can start "selling" the feature.
-Customer support will need to know when the feature launch so that
-they can collate the training materials required to train up customer support agents
-before the feature is actually launched.
+is ready to launch so that they know when they can start "selling" the feature.
+Customer support will need to know when the feature will launch so that
+they can collate the training materials required to train up customer support agents on that new feature before it it out.
 We don't launch in a vacuum.
 We have other groups relying on what’s coming.
 If we miss our target, it will affect the delivery of these other dependencies.
@@ -72,7 +72,7 @@ time estimation is about expectation management is about risk management.
 Using the transitive property on the previous statement,
 _time estimation is about risk management_.
 
-Project risk usually occurs in 2 forms:
+Project risks usually occur in 2 forms:
 
 - Planning risk
 - Execution risk
@@ -123,8 +123,8 @@ so we need to highlight them and adjust timelines as they emerge.
 When highlighting the probability and impact of risk,
 it's worth thinking about the idea of materialized vs. unmaterialized risk.
 For example,
-integrating with a new vendor starts as an unmaterialized risk
-- we aren't familiar with the accuracy of their documentation
+integrating with a new vendor starts as an unmaterialized risk -
+we aren't familiar with the accuracy of their documentation
 and the reliability of their APIs,
 but as long as we’ve done what we can with reading their documentation,
 there’s not much else that can be done until we actually start integrating.
@@ -166,16 +166,16 @@ that I've identified in projects:
 ## Conclusion
 
 I've got a system that currently works for me.
-Being explicit about risks help set the expectation to stakeholders, 
+Being explicit about risks helps to set the expectation to stakeholders,
 and the regular communication builds trust with management.
 Ultimately, I think this is what matters most in managing projects
 in a corporate environment.
-It's kind of a change from start-up life, 
+It's kind of a change from the start-up life,
 where you just hack your way to a product.
 But when you've got more moving pieces to juggle,
 risk management is the key to giving better time estimates
 for project completion.
 
 ---
-_Acknowledgement:_ 
+_Acknowledgement:_
 Thanks to Dennis Poon for helping me refine the ideas and thinking through planning vs execution risks.
