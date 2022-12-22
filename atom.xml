@@ -8,8 +8,39 @@
         <name>Michelle Tran</name>
         <email>email@michtran.ca</email>
     </author>
-    <updated>2022-10-29T00:00:00Z</updated>
+    <updated>2022-12-22T00:00:00Z</updated>
     <entry>
+    <title>Reflecting on 10 years as a Software Developer</title>
+    <link href="http://michtran.ca/blog//blog/posts/2022-12-22-Reflecting_10_years.html" />
+    <id>http://michtran.ca/blog//blog/posts/2022-12-22-Reflecting_10_years.html</id>
+    <published>2022-12-22T00:00:00Z</published>
+    <updated>2022-12-22T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+<em>Posted on December 22, 2022</em>
+    
+</div>
+
+<p>This year, I celebrate 10 years as a Software Developer. Admittedly, I’m still a bit surprised that I’m still in the same industry, especially since I kind of got into it by accident. Being a software developer has been a fairly fulfilling career, as much as a career under capitalism can be fulfilling. I have a good income and a relatively flexible schedule.</p>
+<p>Over the years, I’ve intentionally chosen jobs where I get to learn something. This has led me to work in many different companies, from large public enterprises to 10 people startups. All the companies I’ve worked for were considered “tech” companies, although they all ranged from e-commerce, data science, fintech, and devops. In that sense, my experience is biased towards companies that treat their developers as first tier employees (compared to companies which hire developers, but tech isn’t their product).</p>
+<p>I’ve recently decided (ie. in the last few months) that I want to become a Software Architect. How did I manage being a Software Developer for 10(!!!) years without knowing what I wanted in the end? I imagine this is a pretty common scenario for most people. I realized this after reading Staff Engineer (by Will Larson), Fundamentals of Software Architecture (by Mark Richards, Neal Ford), and also working closely with some Staff Engineers at my previous company then thinking: <em>“hey, I want to do what they’re doing and I probably won’t suck at it”</em>.</p>
+<p>Most technical problems have already been solved by a bigger and better resourced company than yours. Being “in the know” of these solutions and knowing how they fit into your product roadmap is a skill in itself.</p>
+<p>The more senior you get, the more that writing and communication skills matter. This is where having a liberal arts degree will prove useful.</p>
+<p>I have a horrible tendency to be very glib when discussing things in person. My excuse for this is because I find it fun to think up ridiculous scenarios to solve a problem, and take it half seriously (example: suggesting that we trade a person on the team with some service ownership changes). I’m realizing now that being more senior means needing to be taken more seriously, which means that I’m going to have to be more thoughtful when I say something. At best, maybe there is some insight that will help contribute to the final solution. But at worst, people will question my competance. Maybe there’s a balance that I haven’t perfected yet. Being fully remote (and also having a different tone when writing) definitely helps.</p>
+<p>All successful companies will have an interesting scaling challenge. I haven’t interviewed with a company that did not talk about their exciting scaling challenge.</p>
+<p>Self-promotion, or promotion of an idea is an undervalued skill. It’s an almost contradictory skill to what makes someone a good software developer (ie. discerning and critical assessment of code/proposal). I struggle with this, but also realize that if I want to be an effective leader (and climb the corporate ranks <em>shudder</em>) then this is something that I need to work on.</p>
+<p>You owe no company your labour and time outside your contract. No matter how much a company describes their culture as a “family” or that they care about their employees, remember that they care way more about their shareholders and profit.</p>
+<p>Being oncall is valuable experience. All engineers should go oncall at least for some portion of their careers, but the best companies are the ones who compensate properly for the extra hours of being standby. Going oncall for a week requires lifestyle changes and extra cognitive overhead that wouldn’t have occurred otherwise (like carrying around your laptop for outings where you’re going more than 15 mins away from home, only going places where you will have good internet reception, and ensuring that there’s someone else there to pick up caring for your toddler when/if you have to drop everything to attend to a page). That being said, I still get a sinking feeling in my chest when a page goes off (oncall PTSD maybe).</p>
+<p>Some bucket-list career things that I still maybe want to achieve:</p>
+<ul>
+<li>work at a consultancy or do freelance work</li>
+<li>give a talk at a conference (was more important to me maybe 5 years ago, but now I don’t really enjoy going to conferences nor do I actually like to listen to conference talks for learning)</li>
+<li>work at a non-profit doing something medical, legal or climate adjacent. I want to make the world better.</li>
+<li>figure out what I really want to be when I grow up</li>
+</ul>
+<p>Finally, a secret confession: I don’t do that much coding for fun.</p>
+]]></summary>
+</entry>
+<entry>
     <title>Elixir: An Exit Review</title>
     <link href="http://michtran.ca/blog//blog/posts/2022-10-29-Elixir-Exit-Review.html" />
     <id>http://michtran.ca/blog//blog/posts/2022-10-29-Elixir-Exit-Review.html</id>
@@ -191,24 +222,6 @@ def handle_resp(%HTTPoison.Response{} = resp), do: retry()</code></pre>
 <p>I’ve got a system that currently works for me. Being explicit about risks helps to set the expectation to stakeholders, and the regular communication builds trust with management. Ultimately, I think this is what matters most in managing projects in a corporate environment. It’s kind of a change from the start-up life, where you just hack your way to a product. But when you’ve got more moving pieces to juggle, risk management is the key to giving better time estimates for project completion.</p>
 <hr />
 <p><em>Acknowledgement:</em> Thanks to Dennis Poon for helping me refine the ideas and thinking through planning vs execution risks.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Why I Read a lot of Books</title>
-    <link href="http://michtran.ca/blog//blog/posts/2022-02-23-why_i_read.html" />
-    <id>http://michtran.ca/blog//blog/posts/2022-02-23-why_i_read.html</id>
-    <published>2022-02-23T00:00:00Z</published>
-    <updated>2022-02-23T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-<em>Posted on February 23, 2022</em>
-    
-</div>
-
-<p>I try to read 52 books a year. There are people who read more, but many more who read less. A lot of it is fiction, but I also read a lot of non-fiction books too. People who are impressed by how much I read usually ask, <em>“How do you remember everything that you read?”</em>. My answer to that is usually: <em>I don’t</em>.</p>
-<p>If I don’t retain everything that I read, then why do I still try to read so many books? Wouldn’t it be better if I read less, but retained more?</p>
-<p>I think that reading a lot of books helps me build <em>intuition</em>. I may not remember exactly what lead me to think a certain way, but the accumulated knowledge of the thoroughly edited books that I’ve read leads me to having a better judgement on things.</p>
-<p>The classic example is fiction. There are studies that show that people who read a lot of fiction tends to be <a href="https://www.discovermagazine.com/mind/how-reading-fiction-increases-empathy-and-encourages-understanding">more empathetic</a>. Do we remember necessarily which character fits which real life person/situation? Probably not. But the accumulation of the experiences of characters that you read will give you a better understanding of the vast range of human thought.</p>
-<p>So, although I don’t retain most of what I read (and I’m also terrible with quoting books), I read because I enjoy reading and also because I’m building my intuition on whatever topic interests me.</p>
 ]]></summary>
 </entry>
 
