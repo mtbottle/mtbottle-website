@@ -8,8 +8,43 @@
         <name>Michelle Tran</name>
         <email>email@michtran.ca</email>
     </author>
-    <updated>2022-12-22T00:00:00Z</updated>
+    <updated>2023-01-01T00:00:00Z</updated>
     <entry>
+    <title>Retrospective on 2022</title>
+    <link href="http://michtran.ca/blog//blog/posts/2023-01-01-retrospective.html" />
+    <id>http://michtran.ca/blog//blog/posts/2023-01-01-retrospective.html</id>
+    <published>2023-01-01T00:00:00Z</published>
+    <updated>2023-01-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+<em>Posted on January  1, 2023</em>
+    
+</div>
+
+<p>Wow, time goes by so quickly. In summary: it was a bad year for crypto-currencies, social media, Ukraine, Tesla, Pakistan and the climate. I do hope that there’s finally a reckoning with unsustainable (North American) car-centric lifestyle and it’s cost on the climate, mental and physical health, and maintenance/usage cost (subsidized by cheap oil and the fact that infrastructure is fairly new).</p>
+<p>As for myself, I got sick a lot this year. This is what life is like with a toddler in daycare. However, I never tested positive for COVID even though I was fairly ill several times this year. And I’m still recovering from something, so starting off the new year still mildly sick.</p>
+<p>I started writing more in my free time and made an effort to publish more this year. I made it more convienient to jot down notes or blog ideas by having a shared central location to access my writings across devices, which was the main reason for my success with publishing more stuff this year.</p>
+<p>Early in the year, I wrote about my laptop being on the verge of explosion. I ended up giving away that 2015 MBP which was then replaced by a free one that I got from my job when I quit (2019 MBP). I also got myself a new Samsung Tablet which I still use a surprising amount.</p>
+<p>It’s hard to make a decision on my favourite book this year, but if I had to narrow it down, it would be between:</p>
+<ul>
+<li><a href="https://www.goodreads.com/book/show/30312747-not-quite-narwhal">Not Quite Narwhal</a></li>
+<li><a href="https://www.goodreads.com/book/show/36748607-p-is-for-pterodactyl">P is for Pterodactyl</a></li>
+<li><a href="https://www.goodreads.com/book/show/54809220-the-rock-from-the-sky">The Rock from the Sky</a> (don’t actually read this to a 2 year old though, it’s kind of scary for them)</li>
+</ul>
+<p>They all happen to be children’s books, none of which are at the right level for my toddler. I’m not sure what that says about me.</p>
+<p>The <em>“Great Resignation”</em> was full in effect at the beginning of the year. However as we approached the end of the year, there were many layoffs. Even then, I decided to change my job during this time.</p>
+<p>I had enjoyed working at my previous company. The people were great, company was renowned and the projects were mostly interesting. After a team change at the beginning of the year, I found myself slipping from being one of the team’s most senior people (more or less acting as a team lead) to being right in the middle or on the middle-junior side of the team. This meant that all the interesting large projects that I wanted to lead were slowly becoming out of reach and be given to those more <em>senior</em> than me (and I’ll probably be left with smaller projects at <em>“my level”</em>, due to a slowly creeping title inflation that left me inflated out). I decided that to fix this problem, I would have to either <em>actually</em> work on promotion (which included compiling a “promo” package where I write a 10 page document convincing a panel of random peers that I deserve to be promoted) or move elsewhere. Moving elsewhere was apparently much faster and easier. And my new company also checks off another career bucket list item, so total win-win.</p>
+<p>Lastly, some of my favourite phrases coming from my toddler this year:</p>
+<ul>
+<li>“water is too wet”</li>
+<li>“that was a BIG one”</li>
+<li>“RAWR! I lion/tiger/bear”</li>
+<li>“no kick mama, kick dada”</li>
+<li>“you have a big butt!”</li>
+<li>“I love you yellow blankey”</li>
+</ul>
+]]></summary>
+</entry>
+<entry>
     <title>Reflecting on 10 years as a Software Developer</title>
     <link href="http://michtran.ca/blog//blog/posts/2022-12-22-Reflecting_10_years.html" />
     <id>http://michtran.ca/blog//blog/posts/2022-12-22-Reflecting_10_years.html</id>
@@ -58,23 +93,23 @@
 <h2 id="what-i-liked">What I liked</h2>
 <h3 id="pattern-matching-and-guards">Pattern Matching and Guards</h3>
 <p>This simple feature makes programming so much more fun. I’ve mainly used this to substitute for conditionals. For example, handling different response statuses can look like this:</p>
-<pre><code>def handle_resp(%HTTPoison.Response{status_code: 200} = resp), do: ok(resp)
+<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">200</span>} = resp), <span class="kw">do</span>: ok(resp)
 
-def handle_resp(%HTTPoison.Response{status_code: 403} = resp), do: forbidden(resp)
+<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">403</span>} = resp), <span class="kw">do</span>: forbidden(resp)
 
-def handle_resp(%HTTPoison.Response{status_code: 400} = resp), do: not_found(resp)
+<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">400</span>} = resp), <span class="kw">do</span>: not_found(resp)
 
-def handle_resp(%HTTPoison.Response{status_code: status} = resp) when status &gt;= 400 and status &lt; 500 do
+<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> status} = resp) <span class="kw">when</span> status &gt;= <span class="dv">400</span> <span class="kw">and</span> status &lt; <span class="dv">500</span> <span class="kw">do</span>
   user_error(resp)
-end
+<span class="kw">end</span>
 
-# handles all other responses, including 3xx, 5xx
-def handle_resp(%HTTPoison.Response{} = resp), do: retry()</code></pre>
+<span class="co"># handles all other responses, including 3xx, 5xx</span>
+<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{} = resp), <span class="kw">do</span>: retry()</code></pre></div>
 <p>I’ve found this to be a super elegant way of differentiating the code paths without creating too many levels of indentation. Pattern matching is also super useful to get specific items from maps and more complex data structures too.</p>
 <h3 id="pipes">Pipes!</h3>
 <p>In particular, the structure of pipes naturally follows the order they’re executed. This makes it <em>so</em> much easier to read the code.</p>
 <p>For example, in a standard declarative language, you might write something like this:</p>
-<pre><code>last_func(
+<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">last_func(
     third_func(
         second_func(
             first_func(
@@ -82,7 +117,7 @@ def handle_resp(%HTTPoison.Response{} = resp), do: retry()</code></pre>
             )
         )
     )
-)</code></pre>
+)</code></pre></div>
 <p>But with Elixir, this can be written much more elegantly:</p>
 <pre><code>param
 |&gt; first_func()
@@ -145,83 +180,6 @@ def handle_resp(%HTTPoison.Response{} = resp), do: retry()</code></pre>
 <p>Specifically, we use Kafka <em>a lot</em>, but the choices were <code>kafkaex</code> (not super actively developed/maintained, and some known broken functionality) and <code>brod</code> (written in Erlang, poorly documented and cryptic error messages). Given how much we depend on Kafka and with the size and reputation of the company, I would say that it’s a huge disappointment to not see investment in making our own Kafka-Elixir integration.</p>
 <h2 id="final-thoughts">Final Thoughts</h2>
 <p>Although I ended on a particularly negative point, I really did enjoy coding in Elixir. I will miss the elegance in some of the language constructs but overall, I think I’ll be happier to work in a better supported language. I would definitely consider another job in Elixir as I had enjoyed working in it more than other languages I’ve used in the past. If I were to go back to <code>$COMPANY_THAT_USES_ELIXIR</code>, I might even suggest taking ownership of (or forking) <code>kafkaex</code> or create our own open-sourced Kafka library in Elixir. It’s just a shame that I only thought about this after I left the company.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Project Risk and Time Estimation</title>
-    <link href="http://michtran.ca/blog//blog/posts/2022-03-20-project_risk.html" />
-    <id>http://michtran.ca/blog//blog/posts/2022-03-20-project_risk.html</id>
-    <published>2022-03-20T00:00:00Z</published>
-    <updated>2022-03-20T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-<em>Posted on March 20, 2022</em>
-    
-</div>
-
-<p>After years of leading projects, I feel like I’ve finally stopped having an aversion to setting time estimates, and have accepted that they’re a necessary part of project management. Giving these values always feel like I’m just making up a number for the sake of putting in a deadline (ie. <em>bullshitting</em> my way through to project completion). However a shift of mindset from being <em>accurate</em> to doing better <em>expectation management</em> made it easier to accept that forecasting a deadline is not really that bad.</p>
-<p>So this is an article about how I’ve come to not be scared off by work estimation.</p>
-<h2 id="why-it-is-important-to-give-a-target-completion">Why it is important to give a target completion</h2>
-<p>I will admit that giving a completion estimation is in many ways, <em>actually</em> quite arbitrary. There will be many factors that you will not be able to control, like one of your team member’s employment status or unpredictable increase in oncall reactive maintenance. So, deadlines can shift based on these factors.</p>
-<p>However, the importance of giving a target completion, (even when we all know that they tend to slip), is that you can set some expectations to other people in the organization about when they can expect a particular feature to be complete. For instance, the sales department will need to know when a feature is ready to launch so that they know when they can start “selling” the feature. Customer support will need to know when the feature will launch so that they can collate the training materials required to train up customer support agents on that new feature before it it out. We don’t launch in a vacuum. We have other groups relying on what’s coming. If we miss our target, it will affect the delivery of these other dependencies.</p>
-<h2 id="is-there-value-in-work-estimation">Is there value in work estimation?</h2>
-<p>I have yet to find a good technique to do work estimation in a project well. Generally I found that the better you understand the problem/technology/code/team members, the better your technical breakdown, which means the better your estimate. The more details you can get in your plan, the better the estimate.</p>
-<p>The work breakdown and estimation is generally a good start as the initial estimate. This is usually the number I’m most iffy about because there are lots of caveats about the estimation. For instance, if you need to collaborate with another team then the assumption is that there will be <em>no friction</em> between how the developers in each team work together. Or there might be something that we thought was easy, but has turned out more complex than initially planned.</p>
-<p>So when I do time or work estimation now, I usually give the work estimation <em>with</em> some sort of risk assessment.</p>
-<h2 id="time-estimation-is-about-risk-management">Time Estimation is about Risk Management</h2>
-<p>So this leads me to my central thesis: time estimation is about expectation management is about risk management. Using the transitive property on the previous statement, <em>time estimation is about risk management</em>.</p>
-<p>Project risks usually occur in 2 forms:</p>
-<ul>
-<li>Planning risk</li>
-<li>Execution risk</li>
-</ul>
-<h2 id="what-is-planning-risk">What is planning risk?</h2>
-<p>Planning risk usually involves informational uncertainty that has the potential to affect the project deadline.</p>
-<p>These risks may look like:</p>
-<ul>
-<li>unclear requirements (do I have everything I need to work on the project?)</li>
-<li>inherent complexity, or “the known landmines”; some projects have a piece that resists decomposition and/or is logically complex.<br />
-</li>
-<li>overly long or complex critical paths</li>
-<li>technology or tools that the team isn’t familiar with</li>
-<li>scaling issues</li>
-<li>not enough people to work on the project (team too small for the project ambition)</li>
-</ul>
-<h2 id="what-is-execution-risk">What is execution risk?</h2>
-<p>Execution risks usually involve emergent issues that come up as the project progresses.</p>
-<p>These risks may look like:</p>
-<ul>
-<li>dependency on external team</li>
-<li>not enough people to work on the project (assigned people pulled into other company priorities)</li>
-<li>new unforseen requirements</li>
-<li>requirements being more complex than initially planned</li>
-<li>operational load or other non-project priorities</li>
-</ul>
-<h2 id="how-to-use-these-risks-with-time-estimates">How to use these risks with time estimates?</h2>
-<p>I no longer provide time estimates without their context anymore. The initial estimate will include the work breakdown. Then status updates (usually on weekly basis) will include:</p>
-<ul>
-<li>known risks, their probability and impact (can we eat this risk?)</li>
-<li>any major decisions made in project and/or a specify risk item</li>
-<li>forecasted completion date (can be adjusted based on new risks)</li>
-</ul>
-<p>Risk tends to change as the project progresses, so risks early in the project (like those risks that usually occur in the planning phase) will get less risky as we get more clarity on their impact and resolution. Execution risks may crop up unexpectedly, so we need to highlight them and adjust timelines as they emerge.</p>
-<p>When highlighting the probability and impact of risk, it’s worth thinking about the idea of materialized vs. unmaterialized risk. For example, integrating with a new vendor starts as an unmaterialized risk - we aren’t familiar with the accuracy of their documentation and the reliability of their APIs, but as long as we’ve done what we can with reading their documentation, there’s not much else that can be done until we actually start integrating. If, once we start tackling this integration, we’re running into all sorts of problems, that’s a materialized risk, and requires more direct action/potential deadline adjustment.</p>
-<p>This approach is more about <em>communication of expectations</em>, and less about <em>accurate forecasting</em>.</p>
-<h2 id="ive-identified-risks-how-do-i-deal-with-them">I’ve identified risks, how do I deal with them?</h2>
-<p>This is not an exhaustive list of things that I’ve done with risk that I’ve identified in projects:</p>
-<ul>
-<li>being explicit about the risk and the potential effects of risk is the first step! unknown or untracked risks are the riskiest!</li>
-<li>getting more clarity on the risk will help derisk it (ie. scaling issues, if we can find some numbers to project the expected load, then we’re derisking it)</li>
-<li>new process can also help derisk (ie. define cross team syncs to more frequently address cross team collaboration)</li>
-<li>recalibrate the projection, taking into account the risk (ie. given that we’re not sure about the load requirements and the potential necessary steps to fix it, are we still confident about the project projection?)</li>
-<li>rescope some features (ie. we might be able to hit our target date if we don’t add a cache layer)</li>
-<li>for risks associated with landmines/critical paths, we can timebox, swarm or seek additional feedback</li>
-<li>wait and see. Sometimes we might want to wait a bit more to see how we progress (e.g. in the case where it seems like we’re slowly veering off forecast, we might call it out and give it a bit more time. While “do nothing” shouldn’t always be the default, it can be a legitimate choice when there isn’t enough of an impetus for concrete action yet.</li>
-<li>eat the risk and deal with it after the project. We need to ensure that track this risk and add it to our backlog.</li>
-</ul>
-<h2 id="conclusion">Conclusion</h2>
-<p>I’ve got a system that currently works for me. Being explicit about risks helps to set the expectation to stakeholders, and the regular communication builds trust with management. Ultimately, I think this is what matters most in managing projects in a corporate environment. It’s kind of a change from the start-up life, where you just hack your way to a product. But when you’ve got more moving pieces to juggle, risk management is the key to giving better time estimates for project completion.</p>
-<hr />
-<p><em>Acknowledgement:</em> Thanks to Dennis Poon for helping me refine the ideas and thinking through planning vs execution risks.</p>
 ]]></summary>
 </entry>
 

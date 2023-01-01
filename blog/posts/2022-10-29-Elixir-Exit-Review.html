@@ -34,23 +34,23 @@
 <h2 id="what-i-liked">What I liked</h2>
 <h3 id="pattern-matching-and-guards">Pattern Matching and Guards</h3>
 <p>This simple feature makes programming so much more fun. I’ve mainly used this to substitute for conditionals. For example, handling different response statuses can look like this:</p>
-<pre><code>def handle_resp(%HTTPoison.Response{status_code: 200} = resp), do: ok(resp)
+<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">200</span>} = resp), <span class="kw">do</span>: ok(resp)
 
-def handle_resp(%HTTPoison.Response{status_code: 403} = resp), do: forbidden(resp)
+<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">403</span>} = resp), <span class="kw">do</span>: forbidden(resp)
 
-def handle_resp(%HTTPoison.Response{status_code: 400} = resp), do: not_found(resp)
+<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">400</span>} = resp), <span class="kw">do</span>: not_found(resp)
 
-def handle_resp(%HTTPoison.Response{status_code: status} = resp) when status &gt;= 400 and status &lt; 500 do
+<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> status} = resp) <span class="kw">when</span> status &gt;= <span class="dv">400</span> <span class="kw">and</span> status &lt; <span class="dv">500</span> <span class="kw">do</span>
   user_error(resp)
-end
+<span class="kw">end</span>
 
-# handles all other responses, including 3xx, 5xx
-def handle_resp(%HTTPoison.Response{} = resp), do: retry()</code></pre>
+<span class="co"># handles all other responses, including 3xx, 5xx</span>
+<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{} = resp), <span class="kw">do</span>: retry()</code></pre></div>
 <p>I’ve found this to be a super elegant way of differentiating the code paths without creating too many levels of indentation. Pattern matching is also super useful to get specific items from maps and more complex data structures too.</p>
 <h3 id="pipes">Pipes!</h3>
 <p>In particular, the structure of pipes naturally follows the order they’re executed. This makes it <em>so</em> much easier to read the code.</p>
 <p>For example, in a standard declarative language, you might write something like this:</p>
-<pre><code>last_func(
+<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">last_func(
     third_func(
         second_func(
             first_func(
@@ -58,7 +58,7 @@ def handle_resp(%HTTPoison.Response{} = resp), do: retry()</code></pre>
             )
         )
     )
-)</code></pre>
+)</code></pre></div>
 <p>But with Elixir, this can be written much more elegantly:</p>
 <pre><code>param
 |&gt; first_func()
