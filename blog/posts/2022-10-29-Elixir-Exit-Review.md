@@ -30,7 +30,7 @@ This simple feature makes programming so much more fun.
 I've mainly used this to substitute for conditionals.
 For example, handling different response statuses can look like this:
 
-```
+```elixir
 def handle_resp(%HTTPoison.Response{status_code: 200} = resp), do: ok(resp)
 
 def handle_resp(%HTTPoison.Response{status_code: 403} = resp), do: forbidden(resp)
@@ -56,7 +56,7 @@ This makes it _so_ much easier to read the code.
 
 For example, in a standard declarative language, you might write something like this:
 
-```
+```elixir
 last_func(
     third_func(
         second_func(
@@ -183,7 +183,6 @@ It's still a bit repetitive, but gives us the observability for debugging.
 Anyways, I've come to terms that this isn't _that_ terrible.
 I'm not sure I _like_ it that much,
 but I guess I no longer hate it.
-
 
 ### Lacking good third party support
 
