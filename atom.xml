@@ -8,8 +8,70 @@
         <name>Michelle Tran</name>
         <email>email@michtran.ca</email>
     </author>
-    <updated>2023-01-01T00:00:00Z</updated>
+    <updated>2023-01-11T00:00:00Z</updated>
     <entry>
+    <title>Product Limits: You're Going to Need Them</title>
+    <link href="http://michtran.ca/blog//blog/posts/2023-01-11-Product_limits.html" />
+    <id>http://michtran.ca/blog//blog/posts/2023-01-11-Product_limits.html</id>
+    <published>2023-01-11T00:00:00Z</published>
+    <updated>2023-01-11T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+<em>Posted on January 11, 2023</em>
+    
+</div>
+
+<p>Limits on the product functionality is often overlooked and added too late. They tend to be considered after we run into problems with the API, usually after a major incident where we ask <em>“how could this have been prevented”</em> in the incident review. However, once users are accustomed to a certain way of calling the API, it becomes <em>incredibly</em> difficult to add the limit without annoying those users (will likely involve getting them to migrate to a new API or you needing to set a custom limit on them, which won’t result any customer satisfaction either way). And if they’re paying users, than that might just sink your business. So, it’s good to set product limits early to ensure more predictable and manageable operations.</p>
+<h2 id="guidelines-for-thinking-about-product-limits">Guidelines for Thinking about Product Limits</h2>
+<p>I like to come up with checklists on what to think about when it comes making sure I consider <em>stuff</em> (not just product limits) when designing a new system. These product limit questions are not meant to be exhaustive, but just serve as a starting point for thinking about where to add limits. In my experience, there are generally a few areas where these types of limits should be considered:</p>
+<h3 id="api-level-limits">API Level Limits</h3>
+<p>These limits are the ones that exists on the API. Generally, these are the easiest to understand as there are lots of examples of APIs that implemented these which you can look at. They usually involve some sort of limit on request and response. Some useful questions you may want to ask yourself when thinking about designing a new API:</p>
+<ul>
+<li><p>Do we want to set a rate limit on the API? What do we want limit on? (ie. account rate limiting? session rate limiting?)</p></li>
+<li>For endpoints where we return a list of items:
+<ul>
+<li>What kind of pagination strategy can/should we use? (ie. cursor, offset/limit etc.)</li>
+<li>How many results should we return as default on a single page?</li>
+<li>How many results should we set as a max on a single request?</li>
+<li>How far back do we allow users to paginate?</li>
+</ul></li>
+<li><p>What should our response SLAs be?</p></li>
+</ul>
+<h3 id="storage-limits">Storage Limits</h3>
+<p>These limits generally deal with how long we store data and potential contractual limits set on the data. Storage and data access are not free, so we should always consider trimming off the unnecessary data and being explicit about the limitations on storage and access. Some questions you might want to ask yourself about the data you’re adding:</p>
+<ul>
+<li><p>What should our retention policy be? How do we enforce this?</p></li>
+<li><p>Do we want to set a limit to how many objects we store per account/user? How do we enforce this?</p></li>
+<li><p>Do we want to consider tiered access, where users can access data by certain APIs up to certain point, but require a different API or need to contact our customer support for data beyond that threshold?</p></li>
+</ul>
+<h3 id="third-party-request-limits">Third Party Request Limits</h3>
+<p>We want to also consider limits when talking to downstream dependencies. If you application will require a lot of network requests to downstream services, then it would be good to think about the sort of interactions that are acceptable which will affect some of the API contract requirements that we will have. Some questions you may want to ask yourself as you inventory your downsteam requests:</p>
+<ul>
+<li><p>What sorts of timeouts make sense? Given our SLAs?</p></li>
+<li><p>If third party doesn’t return, what kind of degradation will be acceptable? Would having graceful degradation make sense?</p></li>
+</ul>
+<h3 id="data-synchronicity">Data Synchronicity</h3>
+<p>Lastly, for systems that are OK with some level of eventual consistency, we will want to consider how this affects the system and what sort of delay we would be able to tolerate. Some questions you may want to ask yourself about the behaviour of your APIs and data entities related to synchronicity:</p>
+<ul>
+<li><p>Do we have any eventual consistency for data objects that we control? What kind of delay can we tolerate for this?</p></li>
+<li><p>Are there any interactions between our APIs that need to be <em>in-sync</em>? ie. API requests dealing with financial balance will likely require more synchronicity than uploading a profile picture.</p></li>
+<li><p>Can any of the entities that we control relax their current synchronicity? (not that we’re necessarily going to do so, but just that the actual requirements for that object isn’t as strict as it is currently implemented)</p></li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>I wrote this as an exercise to myself for thinking about product limits for one of the projects I’ve lead. Hopefully someone else will find this useful as well.</p>
+<!--- 
+Considerations
+
+- Examples given on the program docs just specify entity limits. I’ve included other things like request timeouts and other product related SLA stuff (which arguably are also “product limits”, as it sets expectations on caller). It’s a question on scope… how much do we think these SLAs are important for availability?
+
+_ For APIs that appear on web, we will likely want to follow some of Web’s SLAs (particularly in regards to the response time SLAs). 
+
+_ I’m also thinking that there is not benefit (for us at least) to separating the API based on source that is calling it (ie. web, API, mobile etc). There might be benefits for other high priority apis (like authentication), but for us I think we can look at APIs as generally as possible.
+
+- For newer services, it will be hard to figure out what our limits should be (as we don’t have established usage patterns). So for these, coming up with a limit based off of what we are expecting from the first iteration of the product should be fine. For example, for triage-assist-service, we can probably set our max limit to 20, as the only place where we’re using that service will only need 20 incidents. If the product changes, then we can consider changing this. Otherwise, we can probably also set an arbitrary larger limit (ie. 50), but the most important is that we’ve thought about and have set something relatively reasonable. 
+-->
+]]></summary>
+</entry>
+<entry>
     <title>Retrospective on 2022</title>
     <link href="http://michtran.ca/blog//blog/posts/2023-01-01-retrospective.html" />
     <id>http://michtran.ca/blog//blog/posts/2023-01-01-retrospective.html</id>
@@ -73,113 +135,6 @@
 <li>figure out what I really want to be when I grow up</li>
 </ul>
 <p>Finally, a secret confession: I don’t do that much coding for fun.</p>
-]]></summary>
-</entry>
-<entry>
-    <title>Elixir: An Exit Review</title>
-    <link href="http://michtran.ca/blog//blog/posts/2022-10-29-Elixir-Exit-Review.html" />
-    <id>http://michtran.ca/blog//blog/posts/2022-10-29-Elixir-Exit-Review.html</id>
-    <published>2022-10-29T00:00:00Z</published>
-    <updated>2022-10-29T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-<em>Posted on October 29, 2022</em>
-    
-</div>
-
-<p>I’ve resigned from my job at <code>$COMPANY_THAT_USES_ELIXIR</code> recently. And in my next role, Elixir will not be my primary programming language. Here are some of my thoughts after working with it for 3 years.</p>
-<h2 id="introduction">Introduction</h2>
-<p>Elixir is a language that is based off of Erlang. This means that it uses the BEAM, which is the Erlang’s virtual machine and also follows Erlang’s OTP design principles.</p>
-<p>I went into the job not knowing much about the language, other than the fact that it was 1. functional and 2. saw that it was hyped on places like <code>lobste.rs</code> and our favourite orange tech news aggregation website.</p>
-<h2 id="what-i-liked">What I liked</h2>
-<h3 id="pattern-matching-and-guards">Pattern Matching and Guards</h3>
-<p>This simple feature makes programming so much more fun. I’ve mainly used this to substitute for conditionals. For example, handling different response statuses can look like this:</p>
-<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">200</span>} = resp), <span class="kw">do</span>: ok(resp)
-
-<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">403</span>} = resp), <span class="kw">do</span>: forbidden(resp)
-
-<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">400</span>} = resp), <span class="kw">do</span>: not_found(resp)
-
-<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> status} = resp) <span class="kw">when</span> status &gt;= <span class="dv">400</span> <span class="kw">and</span> status &lt; <span class="dv">500</span> <span class="kw">do</span>
-  user_error(resp)
-<span class="kw">end</span>
-
-<span class="co"># handles all other responses, including 3xx, 5xx</span>
-<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{} = resp), <span class="kw">do</span>: retry()</code></pre></div>
-<p>I’ve found this to be a super elegant way of differentiating the code paths without creating too many levels of indentation. Pattern matching is also super useful to get specific items from maps and more complex data structures too.</p>
-<h3 id="pipes">Pipes!</h3>
-<p>In particular, the structure of pipes naturally follows the order they’re executed. This makes it <em>so</em> much easier to read the code.</p>
-<p>For example, in a standard declarative language, you might write something like this:</p>
-<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">last_func(
-    third_func(
-        second_func(
-            first_func(
-                param
-            )
-        )
-    )
-)</code></pre></div>
-<p>But with Elixir, this can be written much more elegantly:</p>
-<pre><code>param
-|&gt; first_func()
-|&gt; second_func()
-|&gt; third_func()
-|&gt; last_func()</code></pre>
-<p>More languages should adopt this.</p>
-<h2 id="what-im-not-sure-about">What I’m not sure about</h2>
-<h3 id="genservers-and-otp-design-generally">GenServers (and OTP design generally)</h3>
-<p>I was super excited to learn <a href="https://www.erlang.org/doc/design_principles/des_princ.html">about OTP</a> and building applications based on multiple processes. It’s a unique concept with interesting design implications. Thinking in terms of processes, their lifecycles and designing your data around immutability was a fascinating adventure into something completely unique from the standard object-oriented or even functional world.</p>
-<p>Although this was intellectually interesting, I don’t think I’ve actually seen it used to its full potential as we seldom needed to code our own GenServers. So admittedly, although this was an interesting excursion into a new idea, I’m not sure I have seen a particularly notable usage of OTP.</p>
-<h3 id="interns-struggle-to-onboard">Interns Struggle to Onboard</h3>
-<p>Throughout my 3 years at <code>$COMPANY_THAT_USES_ELIXIR</code>, I’ve found that interns, especially those that are on their first 4 month term with us, really struggle to grasp the language as quickly as other more common languages like Javascript or Python. I’m not entirely sure if my anecdotal evidence is indicative of anything, but it does suggest that there might be something different with Elixir that makes it harder for new coders to get started. Some of my theories for why it’s harder:</p>
-<ol style="list-style-type: decimal">
-<li>Students are more likely to learn OOP at school</li>
-<li>OTP architectural design doesn’t translate well to more mainstream languages/patterns</li>
-<li>Elixir pattern matching, control flows and error handling also doesn’t translate well to more mainstream languages/patterns, which means that prior programming experience doesn’t map as well to patterns used in Elixir</li>
-<li>Four months is not long enough to get a good handle on the idiosyncrasies in the language</li>
-</ol>
-<p>I’ve found that interns on their second or third internship with <code>$COMPANY_THAT_USES_ELIXIR</code> tended to handle the tasks much better.</p>
-<h2 id="what-i-didnt-like">What I didn’t like</h2>
-<h3 id="with-statements">“with” Statements</h3>
-<p>I’ve actually grown a bit more ambivalent with this construct over time. I started to <em>really</em> hate this construct when I ran into some debugging annoyances. For example:</p>
-<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">with {<span class="st">:ok</span>, data}      &lt;- function_call(params),
-     {<span class="st">:ok</span>, more_data} &lt;- function_call2(),
-<span class="kw">do</span>
-  whatever_here()
-<span class="kw">else</span>
-  {<span class="st">:error</span>, <span class="st">:timeout</span>} -&gt; {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
-<span class="kw">end</span></code></pre></div>
-<p>It is impossible to know whether the <code>timeout</code> came from <code>function_call</code> or <code>function_call2</code>. So it’s incredibly hard to trace this call when all you see is <code>{:error, :error_in_with_statement}</code> (not to mention that Elixir’s debugging tools are not great).</p>
-<p>One way to get around this is to actually annotate each line like this:</p>
-<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">with {<span class="st">:this_line</span>, {<span class="st">:ok</span>, data}}      &lt;- {<span class="st">:this_line</span>, function_call(params)},
-     {<span class="st">:that_line</span>, {<span class="st">:ok</span>, more_data}} &lt;- {<span class="st">:that_line</span>, function_call2()},
-<span class="kw">do</span>
-  whatever_here()
-<span class="kw">else</span>
-  {<span class="st">:this_line</span>, {<span class="st">:error</span>, <span class="st">:timeout</span>}} -&gt; 
-    add_some_metrics(<span class="st">:this_line</span>)
-    {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
-
-  {<span class="st">:that_line</span>, {<span class="st">:error</span>, <span class="st">:timeout</span>}} -&gt; {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
-<span class="kw">end</span></code></pre></div>
-<p>This is a reasonable to separate which line caught the error, but makes the code more repetitive (ie. <code>this_line</code> and <code>that_line</code> are repeated 3 times).</p>
-<p>I think that <code>with</code> is powerful when you really want to handle a class of errors the same way. Arguably, <code>timeouts</code> <em>should</em> probably be handled the same, but we still need to differentiate where they’re coming from for observability. We can probably use the clunky appended signifier to handle the error in the same way, but differentiated for observability purposes:</p>
-<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">with {<span class="st">:this_line</span>, {<span class="st">:ok</span>, data}}      &lt;- {<span class="st">:this_line</span>, function_call(params)},
-     {<span class="st">:that_line</span>, {<span class="st">:ok</span>, more_data}} &lt;- {<span class="st">:that_line</span>, function_call2()},
-<span class="kw">do</span>
-  whatever_here()
-<span class="kw">else</span>
-  {line_signifier, {<span class="st">:error</span>, <span class="st">:timeout</span>}} -&gt;
-    add_some_metrics(line_signifier)
-    {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
-<span class="kw">end</span></code></pre></div>
-<p>It’s still a bit repetitive, but gives us the observability for debugging. Anyways, I’ve come to terms that this isn’t <em>that</em> terrible. I’m not sure I <em>like</em> it that much, but I guess I no longer hate it.</p>
-<h3 id="lacking-good-third-party-support">Lacking good third party support</h3>
-<p>My criticism here is probably more on my ex-company rather than something inherent to Elixir itself.</p>
-<p>Elixir is still very immature, and hence, there is a clear lack of support for things that we take for granted in other more mature languages.</p>
-<p>This was admittedly, one of the final contributing factors to making me leave <code>$COMPANY_THAT_USES_ELIXIR</code> (there were several others reasons unrelated to Elixir). I was no longer excited with working in Elixir because third party libraries that we use <em>a lot</em> were poorly documented, hard to use, missing features, and there was little motivation in making it better (or, this was relatively low on the <em>“developer experience”</em> priority list).</p>
-<p>Specifically, we use Kafka <em>a lot</em>, but the choices were <code>kafkaex</code> (not super actively developed/maintained, and some known broken functionality) and <code>brod</code> (written in Erlang, poorly documented and cryptic error messages). Given how much we depend on Kafka and with the size and reputation of the company, I would say that it’s a huge disappointment to not see investment in making our own Kafka-Elixir integration.</p>
-<h2 id="final-thoughts">Final Thoughts</h2>
-<p>Although I ended on a particularly negative point, I really did enjoy coding in Elixir. I will miss the elegance in some of the language constructs but overall, I think I’ll be happier to work in a better supported language. I would definitely consider another job in Elixir as I had enjoyed working in it more than other languages I’ve used in the past. If I were to go back to <code>$COMPANY_THAT_USES_ELIXIR</code>, I might even suggest taking ownership of (or forking) <code>kafkaex</code> or create our own open-sourced Kafka library in Elixir. It’s just a shame that I only thought about this after I left the company.</p>
 ]]></summary>
 </entry>
 
