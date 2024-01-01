@@ -34,13 +34,11 @@
 <p>These limits are the ones that exists on the API. Generally, these are the easiest to understand as there are lots of examples of APIs that implemented these which you can look at. They usually involve some sort of limit on request and response. Some useful questions you may want to ask yourself when thinking about designing a new API:</p>
 <ul>
 <li><p>Do we want to set a rate limit on the API? What do we want limit on? (ie. account rate limiting? session rate limiting?)</p></li>
-<li>For endpoints where we return a list of items:
-<ul>
+<li>For endpoints where we return a list of items:</li>
 <li>What kind of pagination strategy can/should we use? (ie. cursor, offset/limit etc.)</li>
 <li>How many results should we return as default on a single page?</li>
 <li>How many results should we set as a max on a single request?</li>
-<li>How far back do we allow users to paginate?</li>
-</ul></li>
+<li><p>How far back do we allow users to paginate?</p></li>
 <li><p>What should our response SLAs be?</p></li>
 </ul>
 <h3 id="storage-limits">Storage Limits</h3>
