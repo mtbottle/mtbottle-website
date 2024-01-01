@@ -17,7 +17,6 @@ which won't result any customer satisfaction either way).
 And if they're paying users, than that might just sink your business.
 So, it's good to set product limits early to ensure more predictable and manageable operations.
 
-
 ## Guidelines for Thinking about Product Limits
 
 I like to come up with checklists on what to think about when it comes making sure I consider _stuff_
@@ -38,10 +37,10 @@ Some useful questions you may want to ask yourself when thinking about designing
 - Do we want to set a rate limit on the API? What do we want limit on? (ie. account rate limiting? session rate limiting?)
 
 - For endpoints where we return a list of items:
-    - What kind of pagination strategy can/should we use? (ie. cursor, offset/limit etc.)
-    - How many results should we return as default on a single page?
-    - How many results should we set as a max on a single request?
-    - How far back do we allow users to paginate?
+  - What kind of pagination strategy can/should we use? (ie. cursor, offset/limit etc.)
+  - How many results should we return as default on a single page?
+  - How many results should we set as a max on a single request?
+  - How far back do we allow users to paginate?
 
 - What should our response SLAs be?
 
