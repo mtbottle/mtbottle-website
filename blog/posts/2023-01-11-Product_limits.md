@@ -1,5 +1,5 @@
 ---
-title: Product Limits: You're Going to Need Them
+title: Product Limits, You're Going to Need Them
 tags: technology, product
 created: 2022-10-05T11:38:12-04:00
 modified: 2023-01-11T20:58:13-05:00
