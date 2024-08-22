@@ -66,11 +66,13 @@
 <p>These limits are the ones that exists on the API. Generally, these are the easiest to understand as there are lots of examples of APIs that implemented these which you can look at. They usually involve some sort of limit on request and response. Some useful questions you may want to ask yourself when thinking about designing a new API:</p>
 <ul>
 <li><p>Do we want to set a rate limit on the API? What do we want limit on? (ie. account rate limiting? session rate limiting?)</p></li>
-<li>For endpoints where we return a list of items:</li>
+<li>For endpoints where we return a list of items:
+<ul>
 <li>What kind of pagination strategy can/should we use? (ie. cursor, offset/limit etc.)</li>
 <li>How many results should we return as default on a single page?</li>
 <li>How many results should we set as a max on a single request?</li>
-<li><p>How far back do we allow users to paginate?</p></li>
+<li>How far back do we allow users to paginate?</li>
+</ul></li>
 <li><p>What should our response SLAs be?</p></li>
 </ul>
 <h3 id="storage-limits">Storage Limits</h3>
@@ -79,6 +81,8 @@
 <li><p>What should our retention policy be? How do we enforce this?</p></li>
 <li><p>Do we want to set a limit to how many objects we store per account/user? How do we enforce this?</p></li>
 <li><p>Do we want to consider tiered access, where users can access data by certain APIs up to certain point, but require a different API or need to contact our customer support for data beyond that threshold?</p></li>
+<li><p>Should there be size limits for uploaded files?</p></li>
+<li><p>Should there be number of files uploaded for the user? account? session?</p></li>
 </ul>
 <h3 id="third-party-request-limits">Third Party Request Limits</h3>
 <p>We want to also consider limits when talking to downstream dependencies. If you application will require a lot of network requests to downstream services, then it would be good to think about the sort of interactions that are acceptable which will affect some of the API contract requirements that we will have. Some questions you may want to ask yourself as you inventory your downsteam requests:</p>
