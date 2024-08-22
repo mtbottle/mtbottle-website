@@ -37,10 +37,10 @@ Some useful questions you may want to ask yourself when thinking about designing
 - Do we want to set a rate limit on the API? What do we want limit on? (ie. account rate limiting? session rate limiting?)
 
 - For endpoints where we return a list of items:
-  - What kind of pagination strategy can/should we use? (ie. cursor, offset/limit etc.)
-  - How many results should we return as default on a single page?
-  - How many results should we set as a max on a single request?
-  - How far back do we allow users to paginate?
+    - What kind of pagination strategy can/should we use? (ie. cursor, offset/limit etc.)
+    - How many results should we return as default on a single page?
+    - How many results should we set as a max on a single request?
+    - How far back do we allow users to paginate?
 
 - What should our response SLAs be?
 
@@ -59,6 +59,10 @@ Some questions you might want to ask yourself about the data you're adding:
 
 - Do we want to consider tiered access, where users can access data by certain APIs up to certain point,
   but require a different API or need to contact our customer support for data beyond that threshold?
+
+- Should there be size limits for uploaded files?
+
+- Should there be number of files uploaded for the user? account? session?
 
 ### Third Party Request Limits
 
