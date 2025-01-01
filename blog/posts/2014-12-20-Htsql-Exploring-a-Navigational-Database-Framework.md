@@ -1,5 +1,5 @@
 ---
-title: Htsql: Exploring a Navigational Database Framework
+title: Htsql - Exploring a Navigational Database Framework
 ---
 A couple of weeks ago, one of my colleagues brought up an alternative query language to SQL. My first reaction was <i>why do we need a substitute for SQL?</i> Well, there things that are implicit in the database structure but not expressed very well in SQL. For example, consider the following normalized tables:
 <pre lang="sql">

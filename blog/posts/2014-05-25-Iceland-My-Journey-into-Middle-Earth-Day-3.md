@@ -1,5 +1,5 @@
 ---
-title: Iceland: My Journey into Middle Earth (Day 3)
+title: Iceland - My Journey into Middle Earth (Day 3)
 ---
 
 We started from Vík on our third day in Iceland. It is known to be the rainiest and wettest part of Iceland, but we were lucky that it wasn't raining the morning we were there.

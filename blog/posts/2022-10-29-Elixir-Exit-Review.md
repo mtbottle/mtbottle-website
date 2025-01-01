@@ -1,5 +1,5 @@
 ---
-title: Elixir: An Exit Review
+title: Elixir - An Exit Review
 tags: technology
 created: 2022-10-20T23:00:01-04:00
 modified: 2022-10-27T22:52:43-04:00

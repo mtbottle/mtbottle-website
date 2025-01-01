@@ -1,5 +1,5 @@
 ---
-title: Iceland: My Journey into Middle Earth (Day 4)
+title: Iceland - My Journey into Middle Earth (Day 4)
 ---
 
 We were lucky that we had another sunny day in Iceland.

@@ -1,5 +1,5 @@
 ---
-title: Iceland: My Journey into Middle Earth (Day 5)
+title: Iceland - My Journey into Middle Earth (Day 5)
 ---
 
 The 5th day of the trip started out beautifully (like the last 5 days of our trip). We started the day without a plan, but decided that we'll stop at the "interest points" along the way.

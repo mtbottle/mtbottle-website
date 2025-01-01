@@ -1,5 +1,5 @@
 ---
-title: Holiday in the Scottish highlands: Inverness
+title: Holiday in the Scottish highlands - Inverness
 ---
 
 I have fallen into an existential crisis for the last couple of weeks. It is partly to do with the holidays and also partly because I was getting into a comfortable routine and felt like I was losing my sense of purpose. Anyway, to deal with my sudden wave of depression [other than drowning myself in excessive alcohol] I decided to do some solo travelling to "get in touch with myself" again and sort myself out. So this is my blog entry about travelling to Inverness from December 27th 2014 to December 31st 2014.

@@ -1,5 +1,5 @@
 ---
-title: Review of AngularJS: Up and Running
+title: Review of AngularJS - Up and Running
 ---
 So after several weeks of redoing and maintaining parts of our backend system (including a partial migration to using SQLAlchemy), I now have no choice but to actually touch the frontend of our system. I have been dreading this as I had some scarring experience with frontend development (in particular with a certain javascript library called dojo...). I knew rationally that in order to build on my software experience, I cannot escape the frontend experience. So to learn our frontend system, I decided to go through the O'reilly catalogue to pick up&nbsp; a book on Angularjs, which is the frontend framework that we use. This is my review of <a href="http://shop.oreilly.com/product/0636920033486.do?code=WKANJS&amp;intcmp=il-prog-books-videos-lp-intsrch_angularjs_owo_ct">Angularjs: Up and Running by Shyam Seshadri, Brad Green </a>where I am reviewing this book as part of the O'reilly blogger early review program.
 

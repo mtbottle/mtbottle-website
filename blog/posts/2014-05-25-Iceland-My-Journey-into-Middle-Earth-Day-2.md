@@ -1,5 +1,5 @@
 ---
-title: Iceland: My Journey into Middle Earth (Day 2)
+title: Iceland - My Journey into Middle Earth (Day 2)
 ---
 
 Since we were going to hostel around the country, we needed to stock up on non-perishable foods. Also, because I am on the ketogenic diet we couldn't just subsist on apples and bread (although that would have made life easier). So for carrying meat and dairy in a car all day, we decided to find a small cooler bag. Unfortunately, late April is not "summer" and it was impossible to find cooler bags. <a href="http://www.hagkaup.is/">Hagkaup</a> (think Icelandic "Walmart") stocks cooler bags in around mid-May, so if you set to travel around that time, you will have more chance in getting yourself a cooler bag. Instead, we hobo-ed it out with a large plastic tupperware (around 1200 kroners, or $12 CAD) and 2 ice packs. It worked surprisingly well throughout our trip.

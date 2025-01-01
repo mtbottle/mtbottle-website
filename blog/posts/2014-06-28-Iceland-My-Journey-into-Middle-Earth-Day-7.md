@@ -1,5 +1,5 @@
 ---
-title: Iceland: My Journey into Middle Earth (Day 7 and last day)
+title: Iceland - My Journey into Middle Earth (Day 7 and last day)
 ---
 
 <figure>

@@ -1,5 +1,5 @@
 ---
-title: Iceland: My Journey into Middle Earth (Day 6)
+title: Iceland - My Journey into Middle Earth (Day 6)
 ---
 
 This was the first morning where we didn't have any sun in the morning. As with the previous day, we did not have a plan as we set out on our journey other than knowing that we had to reach Bíldudalur in the western fjords.
