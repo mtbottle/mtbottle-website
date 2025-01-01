@@ -35,7 +35,8 @@
 <ul>
 <li>lists are dangerous because we assume one index operation (such as append or insert) will only affect that one element. In truth, because dynamically sized lists are amortized (ie. they allocate a set size then once that size is reached, they allocated an array of x times the original and copy all information over) it may not be as efficient.</li>
 <li>dictionaries are amortized differently than lists, and hence much more performant (but space inefficient) than lists. Luckily this translate to expected behaviour.</li>
-<li>other datastructures I’ve never used : OrderedDict, bisect, deque, queue, heapq, priorityqueue, scheduler… traditional uses of trees are now outsourced to databases. It doesn’t make sense why we get asked this question in programming interviews anymore.</li>
+<li>other datastructures I’ve never used : OrderedDict, bisect, deque, queue, heapq, priorityqueue, scheduler…
+traditional uses of trees are now outsourced to databases. It doesn’t make sense why we get asked this question in programming interviews anymore.</li>
 </ul>
 <h2 id="data-science-talks">Data Science talks</h2>
 <p>There were dozens of data science talks this year. One interesting one was “Enough Machine Learning to Make Hacker News Readable Again” by Ned Jackson Lovely. I sympathized with the premise as it is very difficult to find articles worth reading when are constantly bombarded with content. In this talk I learned that we can use scikitlearn’s pipeline to specify a workflow for our data and that scikitlearn also have GridSearch to try out different parameters for turning machine learning models.</p>

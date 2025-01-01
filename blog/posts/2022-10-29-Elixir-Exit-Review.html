@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>michtran.ca/blog - Elixir: An Exit Review</title>
+        <title>michtran.ca/blog - Elixir - An Exit Review</title>
         <link rel="stylesheet" type="text/css" href="../../css/default.css" />
     </head>
     <body>
@@ -20,45 +20,58 @@
         </div>
 
         <div id="content">
-            <h1>Elixir: An Exit Review</h1>
+            <h1>Elixir - An Exit Review</h1>
 
             <div class="info">
 <em>Posted on October 29, 2022</em>
     
 </div>
 
-<p>I’ve resigned from my job at <code>$COMPANY_THAT_USES_ELIXIR</code> recently. And in my next role, Elixir will not be my primary programming language. Here are some of my thoughts after working with it for 3 years.</p>
+<p>I’ve resigned from my job at <code>$COMPANY_THAT_USES_ELIXIR</code> recently.
+And in my next role, Elixir will not be my primary programming language.
+Here are some of my thoughts after working with it for 3 years.</p>
 <h2 id="introduction">Introduction</h2>
-<p>Elixir is a language that is based off of Erlang. This means that it uses the BEAM, which is the Erlang’s virtual machine and also follows Erlang’s OTP design principles.</p>
-<p>I went into the job not knowing much about the language, other than the fact that it was 1. functional and 2. saw that it was hyped on places like <code>lobste.rs</code> and our favourite orange tech news aggregation website.</p>
+<p>Elixir is a language that is based off of Erlang.
+This means that it uses the BEAM,
+which is the Erlang’s virtual machine
+and also follows Erlang’s OTP design principles.</p>
+<p>I went into the job not knowing much about the language,
+other than the fact that it was 1. functional
+and 2. saw that it was hyped on places like <code>lobste.rs</code>
+and our favourite orange tech news aggregation website.</p>
 <h2 id="what-i-liked">What I liked</h2>
 <h3 id="pattern-matching-and-guards">Pattern Matching and Guards</h3>
-<p>This simple feature makes programming so much more fun. I’ve mainly used this to substitute for conditionals. For example, handling different response statuses can look like this:</p>
-<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">200</span>} = resp), <span class="kw">do</span>: ok(resp)
-
-<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">403</span>} = resp), <span class="kw">do</span>: forbidden(resp)
-
-<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> <span class="dv">400</span>} = resp), <span class="kw">do</span>: not_found(resp)
-
-<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{<span class="st">status_code:</span> status} = resp) <span class="kw">when</span> status &gt;= <span class="dv">400</span> <span class="kw">and</span> status &lt; <span class="dv">500</span> <span class="kw">do</span>
-  user_error(resp)
-<span class="kw">end</span>
-
-<span class="co"># handles all other responses, including 3xx, 5xx</span>
-<span class="kw">def</span> handle_resp(%<span class="dt">HTTPoison</span>.<span class="dt">Response</span>{} = resp), <span class="kw">do</span>: retry()</code></pre></div>
-<p>I’ve found this to be a super elegant way of differentiating the code paths without creating too many levels of indentation. Pattern matching is also super useful to get specific items from maps and more complex data structures too.</p>
+<p>This simple feature makes programming so much more fun.
+I’ve mainly used this to substitute for conditionals.
+For example, handling different response statuses can look like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> handle_resp<span class="fu">(</span>%<span class="cn">HTTPoison</span><span class="op">.</span><span class="cn">Response</span><span class="fu">{</span><span class="va">status_code:</span> <span class="dv">200</span><span class="fu">}</span> <span class="op">=</span> resp<span class="fu">)</span>, <span class="va">do:</span> ok<span class="fu">(</span>resp<span class="fu">)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> handle_resp<span class="fu">(</span>%<span class="cn">HTTPoison</span><span class="op">.</span><span class="cn">Response</span><span class="fu">{</span><span class="va">status_code:</span> <span class="dv">403</span><span class="fu">}</span> <span class="op">=</span> resp<span class="fu">)</span>, <span class="va">do:</span> forbidden<span class="fu">(</span>resp<span class="fu">)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> handle_resp<span class="fu">(</span>%<span class="cn">HTTPoison</span><span class="op">.</span><span class="cn">Response</span><span class="fu">{</span><span class="va">status_code:</span> <span class="dv">400</span><span class="fu">}</span> <span class="op">=</span> resp<span class="fu">)</span>, <span class="va">do:</span> not_found<span class="fu">(</span>resp<span class="fu">)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> handle_resp<span class="fu">(</span>%<span class="cn">HTTPoison</span><span class="op">.</span><span class="cn">Response</span><span class="fu">{</span><span class="va">status_code:</span> status<span class="fu">}</span> <span class="op">=</span> resp<span class="fu">)</span> <span class="kw">when</span> status <span class="op">&gt;=</span> <span class="dv">400</span> <span class="kw">and</span> status <span class="op">&lt;</span> <span class="dv">500</span> <span class="kw">do</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  user_error<span class="fu">(</span>resp<span class="fu">)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># handles all other responses, including 3xx, 5xx</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> handle_resp<span class="fu">(</span>%<span class="cn">HTTPoison</span><span class="op">.</span><span class="cn">Response</span><span class="fu">{}</span> <span class="op">=</span> resp<span class="fu">)</span>, <span class="va">do:</span> retry<span class="fu">()</span></span></code></pre></div>
+<p>I’ve found this to be a super elegant way of differentiating the code paths
+without creating too many levels of indentation.
+Pattern matching is also super useful to get specific items from maps and more complex data structures too.</p>
 <h3 id="pipes">Pipes!</h3>
-<p>In particular, the structure of pipes naturally follows the order they’re executed. This makes it <em>so</em> much easier to read the code.</p>
+<p>In particular, the structure of pipes naturally follows the order they’re executed.
+This makes it <em>so</em> much easier to read the code.</p>
 <p>For example, in a standard declarative language, you might write something like this:</p>
-<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">last_func(
-    third_func(
-        second_func(
-            first_func(
-                param
-            )
-        )
-    )
-)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>last_func<span class="fu">(</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    third_func<span class="fu">(</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        second_func<span class="fu">(</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            first_func<span class="fu">(</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                param</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">)</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">)</span></span></code></pre></div>
 <p>But with Elixir, this can be written much more elegantly:</p>
 <pre><code>param
 |&gt; first_func()
@@ -68,59 +81,116 @@
 <p>More languages should adopt this.</p>
 <h2 id="what-im-not-sure-about">What I’m not sure about</h2>
 <h3 id="genservers-and-otp-design-generally">GenServers (and OTP design generally)</h3>
-<p>I was super excited to learn <a href="https://www.erlang.org/doc/design_principles/des_princ.html">about OTP</a> and building applications based on multiple processes. It’s a unique concept with interesting design implications. Thinking in terms of processes, their lifecycles and designing your data around immutability was a fascinating adventure into something completely unique from the standard object-oriented or even functional world.</p>
-<p>Although this was intellectually interesting, I don’t think I’ve actually seen it used to its full potential as we seldom needed to code our own GenServers. So admittedly, although this was an interesting excursion into a new idea, I’m not sure I have seen a particularly notable usage of OTP.</p>
+<p>I was super excited to learn <a href="https://www.erlang.org/doc/design_principles/des_princ.html">about OTP</a>
+and building applications based on multiple processes.
+It’s a unique concept with interesting design implications.
+Thinking in terms of processes, their lifecycles
+and designing your data around immutability
+was a fascinating adventure into something completely unique
+from the standard object-oriented or even functional world.</p>
+<p>Although this was intellectually interesting,
+I don’t think I’ve actually seen it used to its full potential
+as we seldom needed to code our own GenServers.
+So admittedly, although this was an interesting excursion into a new idea,
+I’m not sure I have seen a particularly notable usage of OTP.</p>
 <h3 id="interns-struggle-to-onboard">Interns Struggle to Onboard</h3>
-<p>Throughout my 3 years at <code>$COMPANY_THAT_USES_ELIXIR</code>, I’ve found that interns, especially those that are on their first 4 month term with us, really struggle to grasp the language as quickly as other more common languages like Javascript or Python. I’m not entirely sure if my anecdotal evidence is indicative of anything, but it does suggest that there might be something different with Elixir that makes it harder for new coders to get started. Some of my theories for why it’s harder:</p>
-<ol style="list-style-type: decimal">
+<p>Throughout my 3 years at <code>$COMPANY_THAT_USES_ELIXIR</code>, I’ve found that interns,
+especially those that are on their first 4 month term with us,
+really struggle to grasp the language as quickly as other more common languages
+like Javascript or Python.
+I’m not entirely sure if my anecdotal evidence is indicative of anything,
+but it does suggest that there might be something different with Elixir
+that makes it harder for new coders to get started.
+Some of my theories for why it’s harder:</p>
+<ol type="1">
 <li>Students are more likely to learn OOP at school</li>
 <li>OTP architectural design doesn’t translate well to more mainstream languages/patterns</li>
-<li>Elixir pattern matching, control flows and error handling also doesn’t translate well to more mainstream languages/patterns, which means that prior programming experience doesn’t map as well to patterns used in Elixir</li>
-<li>Four months is not long enough to get a good handle on the idiosyncrasies in the language</li>
+<li>Elixir pattern matching, control flows and error handling
+also doesn’t translate well to more mainstream languages/patterns,
+which means that prior programming experience doesn’t map as well to patterns used in Elixir</li>
+<li>Four months is not long enough to get a good handle
+on the idiosyncrasies in the language</li>
 </ol>
-<p>I’ve found that interns on their second or third internship with <code>$COMPANY_THAT_USES_ELIXIR</code> tended to handle the tasks much better.</p>
+<p>I’ve found that interns on their second or third internship with <code>$COMPANY_THAT_USES_ELIXIR</code>
+tended to handle the tasks much better.</p>
 <h2 id="what-i-didnt-like">What I didn’t like</h2>
 <h3 id="with-statements">“with” Statements</h3>
-<p>I’ve actually grown a bit more ambivalent with this construct over time. I started to <em>really</em> hate this construct when I ran into some debugging annoyances. For example:</p>
-<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">with {<span class="st">:ok</span>, data}      &lt;- function_call(params),
-     {<span class="st">:ok</span>, more_data} &lt;- function_call2(),
-<span class="kw">do</span>
-  whatever_here()
-<span class="kw">else</span>
-  {<span class="st">:error</span>, <span class="st">:timeout</span>} -&gt; {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
-<span class="kw">end</span></code></pre></div>
-<p>It is impossible to know whether the <code>timeout</code> came from <code>function_call</code> or <code>function_call2</code>. So it’s incredibly hard to trace this call when all you see is <code>{:error, :error_in_with_statement}</code> (not to mention that Elixir’s debugging tools are not great).</p>
+<p>I’ve actually grown a bit more ambivalent with this construct over time.
+I started to <em>really</em> hate this construct when I ran into some debugging annoyances.
+For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>with <span class="fu">{</span><span class="va">:ok</span>, data<span class="fu">}</span>      <span class="op">&lt;-</span> function_call<span class="fu">(</span>params<span class="fu">)</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">{</span><span class="va">:ok</span>, more_data<span class="fu">}</span> <span class="op">&lt;-</span> function_call2<span class="fu">()</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">do</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  whatever_here<span class="fu">()</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="va">:error</span>, <span class="va">:timeout</span><span class="fu">}</span> <span class="op">-&gt;</span> <span class="fu">{</span><span class="va">:error</span>, <span class="va">:error_in_with_statement</span><span class="fu">}</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>It is impossible to know whether the <code>timeout</code> came from <code>function_call</code> or <code>function_call2</code>.
+So it’s incredibly hard to trace this call when all you see is <code>{:error, :error_in_with_statement}</code>
+(not to mention that Elixir’s debugging tools are not great).</p>
 <p>One way to get around this is to actually annotate each line like this:</p>
-<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">with {<span class="st">:this_line</span>, {<span class="st">:ok</span>, data}}      &lt;- {<span class="st">:this_line</span>, function_call(params)},
-     {<span class="st">:that_line</span>, {<span class="st">:ok</span>, more_data}} &lt;- {<span class="st">:that_line</span>, function_call2()},
-<span class="kw">do</span>
-  whatever_here()
-<span class="kw">else</span>
-  {<span class="st">:this_line</span>, {<span class="st">:error</span>, <span class="st">:timeout</span>}} -&gt; 
-    add_some_metrics(<span class="st">:this_line</span>)
-    {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
-
-  {<span class="st">:that_line</span>, {<span class="st">:error</span>, <span class="st">:timeout</span>}} -&gt; {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
-<span class="kw">end</span></code></pre></div>
-<p>This is a reasonable to separate which line caught the error, but makes the code more repetitive (ie. <code>this_line</code> and <code>that_line</code> are repeated 3 times).</p>
-<p>I think that <code>with</code> is powerful when you really want to handle a class of errors the same way. Arguably, <code>timeouts</code> <em>should</em> probably be handled the same, but we still need to differentiate where they’re coming from for observability. We can probably use the clunky appended signifier to handle the error in the same way, but differentiated for observability purposes:</p>
-<div class="sourceCode"><pre class="sourceCode elixir"><code class="sourceCode elixir">with {<span class="st">:this_line</span>, {<span class="st">:ok</span>, data}}      &lt;- {<span class="st">:this_line</span>, function_call(params)},
-     {<span class="st">:that_line</span>, {<span class="st">:ok</span>, more_data}} &lt;- {<span class="st">:that_line</span>, function_call2()},
-<span class="kw">do</span>
-  whatever_here()
-<span class="kw">else</span>
-  {line_signifier, {<span class="st">:error</span>, <span class="st">:timeout</span>}} -&gt;
-    add_some_metrics(line_signifier)
-    {<span class="st">:error</span>, <span class="st">:error_in_with_statement</span>}
-<span class="kw">end</span></code></pre></div>
-<p>It’s still a bit repetitive, but gives us the observability for debugging. Anyways, I’ve come to terms that this isn’t <em>that</em> terrible. I’m not sure I <em>like</em> it that much, but I guess I no longer hate it.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>with <span class="fu">{</span><span class="va">:this_line</span>, <span class="fu">{</span><span class="va">:ok</span>, data<span class="fu">}}</span>      <span class="op">&lt;-</span> <span class="fu">{</span><span class="va">:this_line</span>, function_call<span class="fu">(</span>params<span class="fu">)}</span>,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">{</span><span class="va">:that_line</span>, <span class="fu">{</span><span class="va">:ok</span>, more_data<span class="fu">}}</span> <span class="op">&lt;-</span> <span class="fu">{</span><span class="va">:that_line</span>, function_call2<span class="fu">()}</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">do</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  whatever_here<span class="fu">()</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="va">:this_line</span>, <span class="fu">{</span><span class="va">:error</span>, <span class="va">:timeout</span><span class="fu">}}</span> <span class="op">-&gt;</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    add_some_metrics<span class="fu">(</span><span class="va">:this_line</span><span class="fu">)</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="va">:error</span>, <span class="va">:error_in_with_statement</span><span class="fu">}</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span><span class="va">:that_line</span>, <span class="fu">{</span><span class="va">:error</span>, <span class="va">:timeout</span><span class="fu">}}</span> <span class="op">-&gt;</span> <span class="fu">{</span><span class="va">:error</span>, <span class="va">:error_in_with_statement</span><span class="fu">}</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>This is a reasonable to separate which line caught the error,
+but makes the code more repetitive (ie. <code>this_line</code> and <code>that_line</code> are repeated 3 times).</p>
+<p>I think that <code>with</code> is powerful when you really want to handle a class of errors the same way.
+Arguably, <code>timeouts</code> <em>should</em> probably be handled the same,
+but we still need to differentiate where they’re coming from for observability.
+We can probably use the clunky appended signifier to handle the error in the same way,
+but differentiated for observability purposes:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode elixir"><code class="sourceCode elixir"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>with <span class="fu">{</span><span class="va">:this_line</span>, <span class="fu">{</span><span class="va">:ok</span>, data<span class="fu">}}</span>      <span class="op">&lt;-</span> <span class="fu">{</span><span class="va">:this_line</span>, function_call<span class="fu">(</span>params<span class="fu">)}</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">{</span><span class="va">:that_line</span>, <span class="fu">{</span><span class="va">:ok</span>, more_data<span class="fu">}}</span> <span class="op">&lt;-</span> <span class="fu">{</span><span class="va">:that_line</span>, function_call2<span class="fu">()}</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">do</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  whatever_here<span class="fu">()</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">{</span>line_signifier, <span class="fu">{</span><span class="va">:error</span>, <span class="va">:timeout</span><span class="fu">}}</span> <span class="op">-&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    add_some_metrics<span class="fu">(</span>line_signifier<span class="fu">)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="va">:error</span>, <span class="va">:error_in_with_statement</span><span class="fu">}</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p>It’s still a bit repetitive, but gives us the observability for debugging.
+Anyways, I’ve come to terms that this isn’t <em>that</em> terrible.
+I’m not sure I <em>like</em> it that much,
+but I guess I no longer hate it.</p>
 <h3 id="lacking-good-third-party-support">Lacking good third party support</h3>
 <p>My criticism here is probably more on my ex-company rather than something inherent to Elixir itself.</p>
-<p>Elixir is still very immature, and hence, there is a clear lack of support for things that we take for granted in other more mature languages.</p>
-<p>This was admittedly, one of the final contributing factors to making me leave <code>$COMPANY_THAT_USES_ELIXIR</code> (there were several others reasons unrelated to Elixir). I was no longer excited with working in Elixir because third party libraries that we use <em>a lot</em> were poorly documented, hard to use, missing features, and there was little motivation in making it better (or, this was relatively low on the <em>“developer experience”</em> priority list).</p>
-<p>Specifically, we use Kafka <em>a lot</em>, but the choices were <code>kafkaex</code> (not super actively developed/maintained, and some known broken functionality) and <code>brod</code> (written in Erlang, poorly documented and cryptic error messages). Given how much we depend on Kafka and with the size and reputation of the company, I would say that it’s a huge disappointment to not see investment in making our own Kafka-Elixir integration.</p>
+<p>Elixir is still very immature,
+and hence, there is a clear lack of support for things that
+we take for granted in other more mature languages.</p>
+<p>This was admittedly, one of the final contributing factors to making me leave <code>$COMPANY_THAT_USES_ELIXIR</code>
+(there were several others reasons unrelated to Elixir).
+I was no longer excited with working in Elixir
+because third party libraries that we use <em>a lot</em>
+were poorly documented,
+hard to use,
+missing features,
+and there was little motivation in making it better
+(or, this was relatively low on the <em>“developer experience”</em> priority list).</p>
+<p>Specifically, we use Kafka <em>a lot</em>,
+but the choices were <code>kafkaex</code> (not super actively developed/maintained, and some known broken functionality)
+and <code>brod</code> (written in Erlang, poorly documented and cryptic error messages).
+Given how much we depend on Kafka
+and with the size and reputation of the company,
+I would say that it’s a huge disappointment to not see investment in making our own Kafka-Elixir integration.</p>
 <h2 id="final-thoughts">Final Thoughts</h2>
-<p>Although I ended on a particularly negative point, I really did enjoy coding in Elixir. I will miss the elegance in some of the language constructs but overall, I think I’ll be happier to work in a better supported language. I would definitely consider another job in Elixir as I had enjoyed working in it more than other languages I’ve used in the past. If I were to go back to <code>$COMPANY_THAT_USES_ELIXIR</code>, I might even suggest taking ownership of (or forking) <code>kafkaex</code> or create our own open-sourced Kafka library in Elixir. It’s just a shame that I only thought about this after I left the company.</p>
+<p>Although I ended on a particularly negative point,
+I really did enjoy coding in Elixir.
+I will miss the elegance in some of the language constructs
+but overall, I think I’ll be happier to work in a better supported language.
+I would definitely consider another job in Elixir
+as I had enjoyed working in it more than other languages I’ve used in the past.
+If I were to go back to <code>$COMPANY_THAT_USES_ELIXIR</code>,
+I might even suggest taking ownership of (or forking) <code>kafkaex</code>
+or create our own open-sourced Kafka library in Elixir.
+It’s just a shame that I only thought about this after I left the company.</p>
 
         </div>
         <footer>
