@@ -10,8 +10,78 @@
         <email>email@michtran.ca</email>
         
     </author>
-    <updated>2024-01-01T00:00:00Z</updated>
+    <updated>2025-01-01T00:00:00Z</updated>
     <entry>
+    <title>Retrospective on 2024</title>
+    <link href="http://michtran.ca/blog//blog/posts/2025-01-01-Retrospective.html" />
+    <id>http://michtran.ca/blog//blog/posts/2025-01-01-Retrospective.html</id>
+    <published>2025-01-01T00:00:00Z</published>
+    <updated>2025-01-01T00:00:00Z</updated>
+    <summary type="html"><![CDATA[<div class="info">
+<em>Posted on January  1, 2025</em>
+    
+</div>
+
+<p>The year was generally pretty terrible.
+The economy sucks, and it’s going to probably get worse.
+There’s still unnecessary war in the world.
+There’s still existential angst about the climate.
+I’ve been avoiding reading the news.</p>
+<p>Anyways, after a wave of layoffs
+and feeling like I wasn’t making any <em>progress</em>
+with the initiatives that I’ve started,
+I decided to switch companies in the spring.
+It was the right decision. No regrets.</p>
+<p>I was seriously burned out in my previous job,
+and didn’t realize how bad it was until I left the company.
+I was sick for a whole month after I quit.</p>
+<p>I am amused (sad? dreading?) to admit that I’ve actually started using AI to help me code.
+I was skeptical about the technology (still am mostly) last year,
+but search results has been getting shittier
+and have been fairly useless.
+It is much faster to just ask AI the question,
+then verify via official documentation or running the generated code.</p>
+<p>In terms of reading, there wasn’t anything that was particularly memorable this year.
+I was trying to improve my Chinese by reading a bunch of graded readers.
+And I’ve got a new e-reader which is Android based,
+which means that I can install Pleco to read books.
+If I had to choose my favourite reads this year, the highlights were:</p>
+<ul>
+<li>A poetic translation of the <a href="https://www.goodreads.com/book/show/205478817-dao-de-jing">Dao De Jing</a></li>
+<li><a href="https://www.goodreads.com/book/show/63029823-ten-ways-to-get-dumped-by-a-tyrant">Ten Ways to Get Dumpted by a Tyrant</a> because it was the most funny thing I’ve read all year. The sequels were meh though.</li>
+<li><a href="https://www.goodreads.com/book/show/59066963-devil-venerable-also-wants-to-know">Devil Venerable Also Wants to Know</a>, fun danmei which is also a satire on the xianxia cultivation romance genre.</li>
+<li><a href="https://www.goodreads.com/book/show/50623864-the-invisible-life-of-addie-larue">The Invisible Life of Addie Larue</a></li>
+</ul>
+<p>By the end of the year, I also got interested in writing my own Wuxia novel.
+It’s kind of fun to write stories again,
+especially when there are no expectations.</p>
+<p>I’ve been an urbanist for all of my adult life.
+And this year, my partner convinced me to go to more municipal consultations
+(especially in support for a bike lane route in my neighbourhood).
+Then later in the year, we started going to bike lane protests.
+The government decided to use “bike lanes” as a culture war issue
+(to bypass due diligence for seizing land to build another highway,
+but that’s another story)
+and will be ripping out some very heavily used bike lanes.
+It’s hard for me to not feel like my efforts are futile
+and that I should just move to Europe.
+And to my NIMBY neighbours who don’t want to add bike lanes
+but also complaining about the increasing amount of car traffic
+that is routed through their local streets:</p>
+<blockquote>
+<p>THE ONLY WAY TO REDUCE CAR TRAFFIC
+IS TO PROVIDE VIABLE ALTERNATIVES TO DRIVING.
+(this includes adding more bike lanes to make cycling safer)</p>
+</blockquote>
+<p>Again, my goals for this year remain:</p>
+<ul>
+<li>Read 52 books</li>
+<li>Fix something related to my health</li>
+<li>Try to be less angry. Stop reading the news.</li>
+</ul>
+]]></summary>
+</entry>
+<entry>
     <title>Retrospective on 2023</title>
     <link href="http://michtran.ca/blog//blog/posts/2024-01-01-Retrospective_2023.html" />
     <id>http://michtran.ca/blog//blog/posts/2024-01-01-Retrospective_2023.html</id>
@@ -204,90 +274,6 @@ _ I’m also thinking that there is not benefit (for us at least) to separating 
 
 - For newer services, it will be hard to figure out what our limits should be (as we don’t have established usage patterns). So for these, coming up with a limit based off of what we are expecting from the first iteration of the product should be fine. For example, for triage-assist-service, we can probably set our max limit to 20, as the only place where we’re using that service will only need 20 incidents. If the product changes, then we can consider changing this. Otherwise, we can probably also set an arbitrary larger limit (ie. 50), but the most important is that we’ve thought about and have set something relatively reasonable. 
 -->
-]]></summary>
-</entry>
-<entry>
-    <title>Retrospective on 2022</title>
-    <link href="http://michtran.ca/blog//blog/posts/2023-01-01-retrospective.html" />
-    <id>http://michtran.ca/blog//blog/posts/2023-01-01-retrospective.html</id>
-    <published>2023-01-01T00:00:00Z</published>
-    <updated>2023-01-01T00:00:00Z</updated>
-    <summary type="html"><![CDATA[<div class="info">
-<em>Posted on January  1, 2023</em>
-    
-</div>
-
-<p>Wow, time goes by so quickly.
-In summary: it was a bad year for crypto-currencies,
-social media, Ukraine, Tesla, Pakistan and the climate.
-I do hope that there’s finally a reckoning with
-unsustainable (North American) car-centric lifestyle
-and it’s cost on the climate, mental and physical health,
-and maintenance/usage cost
-(subsidized by cheap oil
-and the fact that infrastructure is fairly new).</p>
-<p>As for myself, I got sick a lot this year.
-This is what life is like with a toddler in daycare.
-However, I never tested positive for COVID
-even though I was fairly ill several times this year.
-And I’m still recovering from something,
-so starting off the new year still mildly sick.</p>
-<p>I started writing more in my free time
-and made an effort to publish more this year.
-I made it more convienient
-to jot down notes or blog ideas
-by having a shared central location to access my writings across devices,
-which was the main reason for my success with publishing more stuff this year.</p>
-<p>Early in the year,
-I wrote about my laptop being on the verge of explosion.
-I ended up giving away that 2015 MBP which was then replaced by a free one that
-I got from my job when I quit (2019 MBP).
-I also got myself a new Samsung Tablet which I still use a surprising amount.</p>
-<p>It’s hard to make a decision on my favourite book this year,
-but if I had to narrow it down,
-it would be between:</p>
-<ul>
-<li><a href="https://www.goodreads.com/book/show/30312747-not-quite-narwhal">Not Quite Narwhal</a></li>
-<li><a href="https://www.goodreads.com/book/show/36748607-p-is-for-pterodactyl">P is for Pterodactyl</a></li>
-<li><a href="https://www.goodreads.com/book/show/54809220-the-rock-from-the-sky">The Rock from the Sky</a> (don’t actually read this to a 2 year old though, it’s kind of scary for them)</li>
-</ul>
-<p>They all happen to be children’s books,
-none of which are at the right level for my toddler.
-I’m not sure what that says about me.</p>
-<p>The <em>“Great Resignation”</em> was full in effect at the beginning of the year.
-However as we approached the end of the year, there were many layoffs.
-Even then, I decided to change my job during this time.</p>
-<p>I had enjoyed working at my previous company.
-The people were great, company was renowned and the projects were mostly interesting.
-After a team change at the beginning of the year,
-I found myself slipping from being one of the team’s most senior people
-(more or less acting as a team lead)
-to being right in the middle or on the middle-junior side of the team.
-This meant that all the interesting large projects
-that I wanted to lead
-were slowly becoming out of reach
-and be given to those more <em>senior</em> than me
-(and I’ll probably be left with smaller projects
-at <em>“my level”</em>, due to a slowly creeping title inflation
-that left me inflated out).
-I decided that to fix this problem,
-I would have to either <em>actually</em> work on promotion
-(which included compiling a “promo” package
-where I write a 10 page document convincing a panel of random peers
-that I deserve to be promoted)
-or move elsewhere.
-Moving elsewhere was apparently much faster and easier.
-And my new company also checks off another career bucket list item,
-so total win-win.</p>
-<p>Lastly, some of my favourite phrases coming from my toddler this year:</p>
-<ul>
-<li>“water is too wet”</li>
-<li>“that was a BIG one”</li>
-<li>“RAWR! I lion/tiger/bear”</li>
-<li>“no kick mama, kick dada”</li>
-<li>“you have a big butt!”</li>
-<li>“I love you yellow blankey”</li>
-</ul>
 ]]></summary>
 </entry>
 
